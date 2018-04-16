@@ -2,7 +2,7 @@
 %let dir=C:\Xml\;
 libname &lib "&dir";
 
-%include 'D:\OneDrive\Github\SAS-Projects\환경부 환경통계포털 PM10 미세먼지 시도 및 연도별 비교\env_macro.sas';/*동일 directory 내의 sas를 불러오는 방법을 모르겠습니다. 현재는 env_macro가 있는 위치를 다 작성하여야 합니다.*/
+%include '.\env_macro.sas';/*동일 directory 내의 sas를 불러오는 방법을 모르겠습니다. 현재는 env_macro가 있는 위치를 다 작성하여야 합니다.*/
 
 
 
@@ -53,22 +53,39 @@ group by a.PrdDate_value, a.data_LeftHakmok0;
 quit;
 run;
 
+proc sql;
+create table xml.Pm10_95_15_avg as
+select a.*, avg(a.avg) as avg_total
+from xml.Pm10_95_15_avg as a
+group by a.PrdDate_value;
+quit;
+run;
+
 
 
 proc sgplot data=xml.Pm10_95_15_avg;
 series x=prddate_value y=avg / group=data_LeftHakmok0;
 run;
 
+proc sgplot data=xml.Pm10_95_15_avg;
+series x=prddate_value y=avg_total;
+run;
+
 proc sgplot data=xml.PM10_01_17_avg;
 series x=prddate_value y=avg / group=data_LeftHakmok0;
 run;
 
 proc sgplot data=xml.PM10_01_17_avg;
 series x=prddate_value y=avg / group=data_LeftHakmok0;
-where data_LeftHakmok0="총계" ;
+where data_LeftHakmok0="총계";
 run;
 
 proc sgplot data=xml.PM10_01_17_avg;
 series x=prddate_value y=avg / group=data_LeftHakmok0;
 where prddate_value<201500;
+run;
+
+proc sgplot data=xml.PM10_01_17_avg;
+series x=prddate_value y=avg / group=data_LeftHakmok0;
+where prddate_value<201500 and data_LeftHakmok0="총계";
 run;
