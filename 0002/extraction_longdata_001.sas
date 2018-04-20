@@ -1,51 +1,6 @@
 %let dir=D:\OneDrive\Github\SAS-Projects\0002\;
 %let lib=json;
 %let String01=WBQMR1000052520180323030651FWHGU;/*apiKey*/
-
-libname &lib "&dir";
-
-%macro json(data_final, String05, date_s, date_e);
-data &lib..&data_final;run;
-	%do date_want=&date_s %to &date_e;
-	%do string02=1 %to 5;
-	%let url=&string05?OFFC_CD=&date_want&key=&string01&type=json&pindex=&string02&psize=1000;
-
-	filename out "&dir.SeriesDataOut.txt" recfm=v lrecl=999999999;
-	proc http out=out url="&url" method="post" ct="application/json";
-	run;
-
-	data raw;
-	infile "&dir.SeriesDataOut.txt" dsd lrecl=999999999 dlm='{}[]:,';
-	input raw : $2000.@@;
-	run;
-
-	data temp;
-	merge raw raw(firstobs=2 rename=(raw=_raw));
-	if mod(_n_,2) eq 0;
-	run;
-
-	data temp;
-	set temp;
-	if raw='' then group+1;
-	run;
-
-	proc transpose data=temp out=data_one(drop=_:);
-	by group;
-	id raw;
-	var _raw;
-	run;
-
-	data &lib..&data_final;
-	set &lib..&data_final data_one;
-	run;
-
-	%end;
-	%end;
-data &lib..&data_final;set &lib..&data_final;if _n_=1 then delete;run;
-%mend;
-
-%json(data_final=longdata_001, String05=http://openapi.openfiscaldata.go.kr/VWFOEM, date_s=000, date_e=999);
-
 %let var_want=FSCL_YY
 EXE_M
 OFFC_CD
@@ -65,10 +20,61 @@ EP_AMT
 THISM_AGGR_EP_AMT
 ;
 
+libname &lib "&dir";
+
+%macro json(data_final, String05, date_s, date_e);
+
+	%do date_want=&date_s %to &date_e;
+	data L001_&date_want;run;
+
+		%let string02=1;
+		%do %until (&check=200);
+
+		%let url=&string05?OFFC_CD=&date_want&key=&string01&type=json&pindex=&string02&psize=1000;
+
+		filename out "&dir.SeriesDataOut.txt" recfm=v lrecl=999999999;
+		proc http out=out url="&url" method="post" ct="application/json";
+		run;
+
+		data raw;
+		infile "&dir.SeriesDataOut.txt" dsd lrecl=999999999 dlm='{}[]:,';
+		input raw : $2000.@@;
+		if _n_=5 then call symput('check', scan(raw,2));
+		run;
+
+		data temp;
+		merge raw raw(firstobs=2 rename=(raw=_raw));
+		if mod(_n_,2) eq 0;
+		run;
+
+		data temp;
+		set temp;
+		if raw='' then group+1;
+		run;
+
+		proc transpose data=temp out=data_one(drop=_:);
+		by group;
+		id raw;
+		var _raw;
+		run;
+
+		data L001_&date_want;
+		set L001_&date_want data_one;
+		run;
+
+		%let string02=%eval(&string02+1);
+
+		%end;
+
+	%end;
+
+%mend;
+
+%json(data_final=longdata_001, String05=http://openapi.openfiscaldata.go.kr/VWFOEM, date_s=161, date_e=163);
+
 /*변수명, 변수 형태 변경_start*/
 data &lib .longdata_001;
-set &lib .longdata_001;
-if FSCL_YY="" then delete;
+set L001_0-L001_200;
 label FSCL_YY=	회계년도;
 label EXE_M	=집행월;
 label OFFC_CD=	소관;
@@ -87,5 +93,6 @@ label ANEXP_BDG_CAMT=	예산(원);
 label EP_AMT	=당월집행액(원);
 label THISM_AGGR_EP_AMT	=누계집행액(원);
 keep &var_want;
+if FSCL_YY="" then delete;
 run;
 /*변수명, 변수 형태 변경_end*/
