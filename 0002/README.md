@@ -39,3 +39,5 @@ EP_AMT
 EP_NAMT
 NEXT_YY_BFWAMT
 DUSEAMT
+
+항목별로 한글 표기가 다르니 각각 뽑아서 넘버링을 주는 것이 가장 합리적인 방법으로 생각된다. 
