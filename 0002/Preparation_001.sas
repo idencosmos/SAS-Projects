@@ -3,6 +3,8 @@
 
 libname &lib "&dir";
 
+/*테이블 간 데이터 비교를 위해 만든 코드, 하지만 변수가 너무 많고 세부적인 부분에서 다른 부분이 다수 있어서 조정을 포기하고 결측치로 남을 것으로 예상.*/
+
 proc sql;
 create table &lib..Num_OFFC_004 as select distinct OFFC_CD as OF_CD_004, OFFC_NM as OF_004 from &lib..Longdata_004 order by OFFC_NM;
 create table &lib..Num_FSCL_004 as select distinct FSCL_CD as FS_CD_004, FSCL_NM as FS_004 from &lib..Longdata_004 order by FSCL_NM;
