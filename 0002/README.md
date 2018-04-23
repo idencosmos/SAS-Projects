@@ -6,4 +6,3 @@ PreFinal(폐기): longdata_001-longdata_004 full join by 회계연도~단위사�
 
 ---
 
-var001:
