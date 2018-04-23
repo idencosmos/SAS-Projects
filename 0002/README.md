@@ -1,7 +1,9 @@
-longdata_001: 열린재정 월별 지출집행상황 / 2015-2018 / 예산은 전년도이월액, 추경예산 등을 포함한 현행예산입니다.
+longdata_001: 월별 지출집행상황 / 2015-2018 / 예산은 전년도이월액, 추경예산 등을 포함한 현행예산입니다.
 longdata_002: 세출/지출 예산편성현황(총액) / 2007-2018
 longdata_003: 소관별 세입/세출 결산 현황 / 2007-2018
 longdata_004: 세출/지출 결산 현황 / 2007-2016
-PreFinal: longdata_001-longdata_004 full join by 회계연도~단위사업
+PreFinal(폐기): longdata_001-longdata_004 full join by 회계연도~단위사업
 
 ---
+
+var001:

@@ -73,26 +73,32 @@ libname &lib "&dir";
 %json(String05=http://openapi.openfiscaldata.go.kr/VWFOEM, date_s=000, date_e=200);
 
 /*변수명, 변수 형태 변경_start*/
-data &lib .longdata_001;
+data combine;
 set L001_0-L001_200;
-label FSCL_YY=	회계년도;
-label EXE_M	=집행월;
-label OFFC_CD=	소관;
-label OFFC_NM	=소관명;
-label FSCL_CD	=회계;
-label FSCL_NM	=회계명;
-label FLD_CD	=분야코드;
-label FLD_NM	=분야명;
-label SECT_CD	=부문코드;
-label SECT_NM	=부문명;
-label PGM_CD	=프로그램코드;
-label PGM_NM	=프로그램명;
-label ACTV_CD	=단위사업코드;
-label ACTV_NM	=단위사업명;
-label ANEXP_BDG_CAMT=	예산(원);
-label EP_AMT	=당월집행액(원);
-label THISM_AGGR_EP_AMT	=누계집행액(원);
 keep &var_want;
 if FSCL_YY="" then delete;
 run;
 /*변수명, 변수 형태 변경_end*/
+
+proc sql;
+create table &lib..longdata_001 as
+select input(FSCL_YY, best32.) as FSCL_YY label="회계년도"
+, input(EXE_M, best32.) as EXE_M label="집행월"
+, OFFC_CD as OFFC_CD label="소관"
+, OFFC_NM as OFFC_NM label="소관명"
+, FSCL_CD as FSCL_CD label="회계"
+, FSCL_NM as FSCL_NM label="회계명"
+, FLD_CD as FLD_CD label="분야코드"
+, FLD_NM as FLD_NM label="분야명"
+, SECT_CD as SECT_CD label="부문코드"
+, SECT_NM as SECT_NM label="부문명"
+, PGM_CD as PGM_CD label="프로그램코드"
+, PGM_NM as PGM_NM label="프로그램명"
+, ACTV_CD as ACTV_CD label="단위사업코드"
+, ACTV_NM as ACTV_NM label="단위사업명"
+, input(ANEXP_BDG_CAMT, best32.) as ANEXP_BDG_CAMT label="예산(원)"
+, input(EP_AMT, best32.) as EP_AMT label="당월집행액(원)"
+, input(THISM_AGGR_EP_AMT, best32.) as THISM_AGGR_EP_AMT label="누계집행액(원)"
+from combine;
+quit;
+run;

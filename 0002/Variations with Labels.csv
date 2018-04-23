@@ -1,64 +1,17 @@
-﻿순서,VAR,라벨
-1,FSCL_YY,회계연도
-2,EXE_M,집행월
-3,OFFC_CD,소관
-4,OFFC_NM,소관명
-5,FSCL_CD,회계
-6,FSCL_NM,회계명
-7,ACCT_CD,계정
-8,ACCT_NM,계정명
-9,FLD_CD,분야코드
-10,FLD_NM,분야명
-11,SECT_CD,부문코드
-12,SECT_NM,부문명
-13,PGM_CD,프로그램코드
-14,PGM_NM,프로그램명
-15,ACTV_CD,단위사업
-16,ACTV_NM,단위사업명
-17,CITM_CD,지출목
-18,CITM_NM,지출목명
-19,ANEXP_BDGAMT_F,세출예산액/당초지출계획액(원)
-20,ANEXP_BDGAMT_F_S,당초지출계획액(원)/단위사업별
-21,ANEXP_BDGAMT_M,세출예산액/수정지출계획액(원)
-22,ANEXP_BDGAMT_M_S,수정지출계획액(원)/단위사업별
-23,PREY_BFWAMT,전년도이월액(원)
-24,PREY_BFWAMT_S,전년도이월액(원)/단위사업별
-25,OVR_EP_AMT,초과지출승인액(원)
-26,OVR_EP_AMT_S,초과지출승인액(원)/단위사업별
-27,RSVF_EP_DCS_IAMT,예비비지출결정증액(원)
-28,RSVF_EP_DCS_IAMT_S,예비비지출결정증액(원)/단위사업별
-29,RSVF_EP_DCS_MAMT,예비비지출결정감액(원)
-30,RSVF_EP_DCS_MAMT_S,예비비지출결정감액(원)/단위사업별
-31,BDTR_IAMT,전용증액(원)
-32,BDTR_IAMT_S,전용증액(원)/단위사업별
-33,BDTR_MAMT,전용감액(원)
-34,BDTR_MAMT_S,전용감액(원)/단위사업별
-35,FNT_IAMT,이체증액(원)
-35,FNT_IAMT_S,이체증액(원)/단위사업별
-36,FNT_MAMT,이체감액(원)
-36,FNT_MAMT_S,이체감액(원)/단위사업별
-37,AVDV_IAMT,이용증액(원)
-37,AVDV_IAMT_S,이용증액(원)/단위사업별
-38,AVDV_MAMT,이용감액(원)
-38,AVDV_MAMT_S,이용감액(원)/단위사업별
-39,ANEXP_BDG_CAMT,세출예산현액/지출계획현액(원)
-40,ANEXP_BDG_CAMT_S,세출예산현액(원)/단위사업별
-42,EP_AMT,당월집행액(원)
-42.5,THISM_AGGR_EP_AMT,누계집행액(원)
-43,EP_AMT_S,지출액(원)/단위사업별
-45,EP_NAMT,지출순액(원)
-46,EP_NAMT_S,지출순액(원)/단위사업별
-47,NEXT_YY_BFWAMT,다음년도이월액(원)
-48,NEXT_YY_BFWAMT_S,다음년도이월액(원)/단위사업별
-50,DUSEAMT,불용액(원)
-51,DUSEAMT_S,불용액(원)/단위사업별
-53,REVN_BDG_CAMT,(세입)예산현액
-54,RC_AMT,(세입)수납액(원)
-55,REVN_RC_AMT,(세입)증감액(원)
-56,ANEXP_BDG_CAMT_T,세출예산현액(원)/소관별
-57,EP_AMT_T,지출액(원)/소관별
-58,ANEXP_EP_AMT,(세출)증감액(원)
-59,ELUC_BFWAMT,다음년도이월액(원)
-60,DUSEAMT_T,불용액(원)/소관별
-100,Y_YY_DFN_MEDI_KCUR_AMT,금년도국회확정(천원)
-101,Y_YY_MEDI_KCUR_AMT,금년도정부안(천원)
+﻿",", input(,FSCL_YY,", best32.) as "," label=""",회계년도,"""",", input(FSCL_YY, best32.) as FSCL_YY label=""회계년도"""
+",", input(,EXE_M,", best32.) as "," label=""",집행월,"""",", input(EXE_M, best32.) as EXE_M label=""집행월"""
+",", ,OFFC_CD, as ," label=""",소관,"""",", OFFC_CD as OFFC_CD label=""소관"""
+",", ,OFFC_NM, as ," label=""",소관명,"""",", OFFC_NM as OFFC_NM label=""소관명"""
+",", ,FSCL_CD, as ," label=""",회계,"""",", FSCL_CD as FSCL_CD label=""회계"""
+",", ,FSCL_NM, as ," label=""",회계명,"""",", FSCL_NM as FSCL_NM label=""회계명"""
+",", ,FLD_CD, as ," label=""",분야코드,"""",", FLD_CD as FLD_CD label=""분야코드"""
+",", ,FLD_NM, as ," label=""",분야명,"""",", FLD_NM as FLD_NM label=""분야명"""
+",", ,SECT_CD, as ," label=""",부문코드,"""",", SECT_CD as SECT_CD label=""부문코드"""
+",", ,SECT_NM, as ," label=""",부문명,"""",", SECT_NM as SECT_NM label=""부문명"""
+",", ,PGM_CD, as ," label=""",프로그램코드,"""",", PGM_CD as PGM_CD label=""프로그램코드"""
+",", ,PGM_NM, as ," label=""",프로그램명,"""",", PGM_NM as PGM_NM label=""프로그램명"""
+",", ,ACTV_CD, as ," label=""",단위사업코드,"""",", ACTV_CD as ACTV_CD label=""단위사업코드"""
+",", ,ACTV_NM, as ," label=""",단위사업명,"""",", ACTV_NM as ACTV_NM label=""단위사업명"""
+",", input(,ANEXP_BDG_CAMT,", best32.) as "," label=""",예산(원),"""",", input(ANEXP_BDG_CAMT, best32.) as ANEXP_BDG_CAMT label=""예산(원)"""
+",", input(,EP_AMT,", best32.) as "," label=""",당월집행액(원),"""",", input(EP_AMT, best32.) as EP_AMT label=""당월집행액(원)"""
+",", input(,THISM_AGGR_EP_AMT,", best32.) as "," label=""",누계집행액(원),"""",", input(THISM_AGGR_EP_AMT, best32.) as THISM_AGGR_EP_AMT label=""누계집행액(원)"""

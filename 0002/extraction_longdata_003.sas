@@ -66,19 +66,25 @@ libname &lib "&dir";
 %json(String05=http://openapi.openfiscaldata.go.kr/DepartRevenExpenSettle, date_s=2000, date_e=2018);
 
 /*변수명, 변수 형태 변경_start*/
-data &lib .longdata_003;
+data combine;
 set L001_2000-L001_2018;
-label FSCL_YY	=회계연도;
-label OFFC_NM	=소관명;
-label REVN_BDG_CAMT	=(세입)예산현액;
-label RC_AMT	=(세입)수납액(원);
-label REVN_RC_AMT=	(세입)증감액(원);
-label ANEXP_BDG_CAMT	=(세출)예산현액(원);
-label EP_AMT	=(세출)지출액(원);
-label ANEXP_EP_AMT	=(세출)증감액(원);
-label ELUC_BFWAMT	=다음년도이월액(원);
-label DUSEAMT	=불용액(원);
 keep &var_want;
 if FSCL_YY="" then delete;
 run;
 /*변수명, 변수 형태 변경_end*/
+
+proc sql;
+create table &lib..longdata_003 as
+select input(FSCL_YY, best32.) as FSCL_YY label="회계연도"
+, OFFC_NM as OFFC_NM label="소관명"
+, input(REVN_BDG_CAMT, best32.) as REVN_BDG_CAMT label="(세입)예산현액"
+, input(RC_AMT, best32.) as RC_AMT label="(세입)수납액(원)"
+, input(REVN_RC_AMT, best32.) as REVN_RC_AMT label="(세입)증감액(원)"
+, input(ANEXP_BDG_CAMT, best32.) as ANEXP_BDG_CAMT label="(세출)예산현액(원)"
+, input(EP_AMT, best32.) as EP_AMT label="(세출)지출액(원)"
+, input(ANEXP_EP_AMT, best32.) as ANEXP_EP_AMT label="(세출)증감액(원)"
+, input(ELUC_BFWAMT, best32.) as ELUC_BFWAMT label="다음년도이월액(원)"
+, input(DUSEAMT, best32.) as DUSEAMT label="불용액(원)"
+from combine;
+quit;
+run;
