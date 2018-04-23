@@ -1,4 +1,4 @@
-%let dir=D:\OneDrive\Github\SAS-Projects\0002\;
+%let dir=D:\OneDrive\Github\SAS-Projects\0002\sas7bdat\;
 %let lib=json;
 %let String01=WBQMR1000052520180323030651FWHGU;/*apiKey*/
 %let var_want=FSCL_YY
