@@ -1,4 +1,4 @@
-%let dir=D:\OneDrive\Github\SAS-Projects\0002\;
+%let dir=D:\OneDrive\Github\SAS-Projects\0002\sas7bdat\;
 %let lib=json;
 %let String01=WBQMR1000052520180323030651FWHGU;/*apiKey*/
 %let var_want=FSCL_YY
@@ -66,19 +66,25 @@ libname &lib "&dir";
 %json(String05=http://openapi.openfiscaldata.go.kr/ExpenditureBudgetInit, date_s=2000, date_e=2018);
 
 /*변수명, 변수 형태 변경_start*/
-data &lib .longdata_002;
+data combine;
 set L001_2000-L001_2018;
-label FSCL_YY	=회계연도;
-label OFFC_NM	=소관명;
-label FSCL_NM	=회계명;
-label ACCT_NM	=계정명;
-label FLD_NM	=분야명;
-label SECT_NM	=부문명;
-label PGM_NM	=프로그램명;
-label ACTV_NM	=단위사업명;
-label Y_YY_MEDI_KCUR_AMT	=금년도정부안(천원);
-label Y_YY_DFN_MEDI_KCUR_AMT	=금년도국회확정(천원);
 keep &var_want;
 if FSCL_YY="" then delete;
 run;
 /*변수명, 변수 형태 변경_end*/
+
+proc sql;
+create table &lib..longdata_002 as
+select input(FSCL_YY, best32.) as FSCL_YY label="회계연도"
+, OFFC_NM as OFFC_NM label="소관명"
+, FSCL_NM as FSCL_NM label="회계명"
+, ACCT_NM as ACCT_NM label="계정명"
+, FLD_NM as FLD_NM label="분야명"
+, SECT_NM as SECT_NM label="부문명"
+, PGM_NM as PGM_NM label="프로그램명"
+, ACTV_NM as ACTV_NM label="단위사업명"
+, input(Y_YY_MEDI_KCUR_AMT, best32.)*1000 as Y_YY_MEDI_KCUR_AMT label="금년도정부안(원)"
+, input(Y_YY_DFN_MEDI_KCUR_AMT, best32.)*1000 as Y_YY_DFN_MEDI_KCUR_AMT label="금년도국회확정(원)"
+from combine;
+quit;
+run;

@@ -1,4 +1,4 @@
-%let dir=D:\OneDrive\Github\SAS-Projects\0002\;
+%let dir=D:\OneDrive\Github\SAS-Projects\0002\sas7bdat\;
 %let lib=json;
 %let String01=WBQMR1000052520180323030651FWHGU;/*apiKey*/
 %let var_want=FSCL_YY
@@ -90,43 +90,49 @@ libname &lib "&dir";
 %json(String05=http://openapi.openfiscaldata.go.kr/ExpendituresSettlement, date_s=2000, date_e=2018);
 
 /*변수명, 변수 형태 변경_start*/
-data &lib .longdata_004;
+data combine;
 set L001_2000-L001_2018;
-label FSCL_YY	=회계연도;
-label OFFC_CD	=소관;
-label OFFC_NM	=소관명;
-label FSCL_CD	=회계;
-label FSCL_NM=	회계명;
-label ACCT_CD=	계정;
-label ACCT_NM	=계정명;
-label FLD_CD	=분야;
-label FLD_NM	=분야명;
-label SECT_CD	=부문;
-label SECT_NM=	부문명;
-label PGM_CD=	프로그램;
-label PGM_NM	=프로그램명;
-label ACTV_CD	=단위사업;
-label ACTV_NM=	단위사업명;
-label CITM_CD=	지출목;
-label CITM_NM=	지출목명;
-label ANEXP_BDGAMT_F=	세출예산액/당초지출계획액(원);
-label ANEXP_BDGAMT_M	=세출예산액/수정지출계획액(원);
-label PREY_BFWAMT=	전년도이월액(원);
-label OVR_EP_AMT=	초과지출승인액(원);
-label RSVF_EP_DCS_IAMT	=예비비지출결정증액(원);
-label RSVF_EP_DCS_MAMT=	예비비지출결정감액(원);
-label BDTR_IAMT	=전용증액(원);
-label BDTR_MAMT	=전용감액(원);
-label AVDV_IAMT	=이용증액(원);
-label AVDV_MAMT	=이용감액(원);
-label FNT_IAMT=	이체증액(원);
-label FNT_MAMT	=이체감액(원);
-label ANEXP_BDG_CAMT	=세출예산현액/지출계획현액(원);
-label EP_AMT=	지출액(원);
-label EP_NAMT	=지출순액(원);
-label NEXT_YY_BFWAMT=	다음년도이월액(원);
-label DUSEAMT=	불용액(원);
 keep &var_want;
 if FSCL_YY="" then delete;
 run;
 /*변수명, 변수 형태 변경_end*/
+
+proc sql;
+create table &lib..longdata_004 as
+select input(FSCL_YY, best32.) as FSCL_YY label="회계연도"
+, OFFC_CD as OFFC_CD label="소관"
+, OFFC_NM as OFFC_NM label="소관명"
+, FSCL_CD as FSCL_CD label="회계"
+, FSCL_NM as FSCL_NM label="회계명"
+, ACCT_CD as ACCT_CD label="계정"
+, ACCT_NM as ACCT_NM label="계정명"
+, FLD_CD as FLD_CD label="분야"
+, FLD_NM as FLD_NM label="분야명"
+, SECT_CD as SECT_CD label="부문"
+, SECT_NM as SECT_NM label="부문명"
+, PGM_CD as PGM_CD label="프로그램"
+, PGM_NM as PGM_NM label="프로그램명"
+, ACTV_CD as ACTV_CD label="단위사업"
+, ACTV_NM as ACTV_NM label="단위사업명"
+, CITM_CD as CITM_CD label="지출목"
+, CITM_NM as CITM_NM label="지출목명"
+, input(ANEXP_BDGAMT_F, best32.) as ANEXP_BDGAMT_F label="세출예산액/당초지출계획액(원)"
+, input(ANEXP_BDGAMT_M, best32.) as ANEXP_BDGAMT_M label="세출예산액/수정지출계획액(원)"
+, input(PREY_BFWAMT, best32.) as PREY_BFWAMT label="전년도이월액(원)"
+, input(OVR_EP_AMT, best32.) as OVR_EP_AMT label="초과지출승인액(원)"
+, input(RSVF_EP_DCS_IAMT, best32.) as RSVF_EP_DCS_IAMT label="예비비지출결정증액(원)"
+, input(RSVF_EP_DCS_MAMT, best32.) as RSVF_EP_DCS_MAMT label="예비비지출결정감액(원)"
+, input(BDTR_IAMT, best32.) as BDTR_IAMT label="전용증액(원)"
+, input(BDTR_MAMT, best32.) as BDTR_MAMT label="전용감액(원)"
+, input(AVDV_IAMT, best32.) as AVDV_IAMT label="이용증액(원)"
+, input(AVDV_MAMT, best32.) as AVDV_MAMT label="이용감액(원)"
+, input(FNT_IAMT, best32.) as FNT_IAMT label="이체증액(원)"
+, input(FNT_MAMT, best32.) as FNT_MAMT label="이체감액(원)"
+, input(ANEXP_BDG_CAMT, best32.) as ANEXP_BDG_CAMT label="세출예산현액/지출계획현액(원)"
+, input(EP_AMT, best32.) as EP_AMT label="지출액(원)"
+, input(EP_NAMT, best32.) as EP_NAMT label="지출순액(원)"
+, input(NEXT_YY_BFWAMT, best32.) as NEXT_YY_BFWAMT label="다음년도이월액(원)"
+, input(DUSEAMT, best32.) as DUSEAMT label="불용액(원)"
+from combine;
+quit;
+run;
