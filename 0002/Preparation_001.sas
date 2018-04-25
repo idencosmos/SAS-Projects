@@ -105,7 +105,11 @@ run;
 
 proc sql;
 create table &lib..var004 as
-select a.*, b.w10, b.w11, a.v10/b.w10 as v15, a.v11/b.w11 as v16, a.v10-b.w10 as v17, a.v11-b.w11 as v18, a.v14/b.w14 as v19, a.v14-b.w14 as v20 from
+select a.*, b.w10, b.w11, b.w14, (a.v10-b.w10)/a.v10 as v15, (a.v11-b.w11)/a.v11 as v16, a.v10-b.w10 as v17, a.v11-b.w11 as v18, b.w14/b.w10 as v19, a.v14-b.w14 as v20, case
+when input(a.FSCL_CD, best32.)>200 and input(a.FSCL_CD, best32.)<400 then '특별회계'
+when input(a.FSCL_CD, best32.)>500 then '기금'
+when input(a.FSCL_CD, best32.)=110 then '일반회계'
+else '기타' end as v22 from
 (
 select distinct FSCL_YY
 , OFFC_CD
@@ -189,6 +193,8 @@ run;
 
 proc sql;
 create table &lib..var005 as
+select a.*, b.v23, a.v10/b.v23 as v24 from
+(
 select distinct FSCL_YY
 , OFFC_CD
 , OFFC_NM
@@ -202,8 +208,37 @@ select distinct FSCL_YY
 , PGM_NM
 , ACTV_CD
 , ACTV_NM
-, case when input(FSCL_CD, best32.)>200 and input(FSCL_CD, best32.)<400 then '특별회계' when input(FSCL_CD, best32.)>500 then '기금' when input(FSCL_CD, best32.)=110 then '일반회계' else '기타' end as v22
-from &lib..longdata_004;
+, SUM(ANEXP_BDG_CAMT) as v10
+from &lib..longdata_004
+group by FSCL_YY
+, OFFC_CD
+, OFFC_NM
+, FSCL_CD
+, FSCL_NM
+, FLD_CD
+, FLD_NM
+, SECT_CD
+, SECT_NM
+, PGM_CD
+, PGM_NM
+, ACTV_CD
+, ACTV_NM
+) as a
+left join
+(
+select distinct FSCL_YY
+, OFFC_CD
+, OFFC_NM
+, SUM(ANEXP_BDG_CAMT) as v23
+from &lib..longdata_004
+group by FSCL_YY
+, OFFC_CD
+, OFFC_NM
+) as b
+on a.FSCL_YY=b.FSCL_YY
+and a.OFFC_CD=b.OFFC_CD
+and a.OFFC_NM=b.OFFC_NM
+;
 quit;
 run;
 
