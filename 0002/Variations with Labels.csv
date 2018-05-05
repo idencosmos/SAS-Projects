@@ -1,64 +1,64 @@
-﻿지출목명,지출목,자산
-인건비,110,0
-운영비,210,0
-여비,220,0
-특수활동비,230,0
-업무추진비,240,0
-직무수행경비,250,0
-연구개발비,260,0
-연구용역비,260,0
-보전금,310,0
-민간이전,320,0
-자치단체이전,330,0
-해외이전,340,0
-일반출연금,350,0
-출연금,350,0
-연구개발출연금,360,0
-토지매입비,410,1
-건설비,420,1
-유형자산,430,1
-무형고정자산,440,1
-무형자산,440,1
-융자금,450,1
-출자금,460,1
-예치금및유가증권매입,470,1
-예탁금,480,1
-상환지출,510,0
-전출금등,610,0
-예비비및기타,710,0
-
-
-",", input(,FSCL_YY,", best32.) as "," label=""",회계연도,"""",", input(FSCL_YY, best32.) as FSCL_YY label=""회계연도"""
-",", ,OFFC_CD, as ," label=""",소관,"""",", OFFC_CD as OFFC_CD label=""소관"""
-",", ,OFFC_NM, as ," label=""",소관명,"""",", OFFC_NM as OFFC_NM label=""소관명"""
-",", ,FSCL_CD, as ," label=""",회계,"""",", FSCL_CD as FSCL_CD label=""회계"""
-",", ,FSCL_NM, as ," label=""",회계명,"""",", FSCL_NM as FSCL_NM label=""회계명"""
-",", ,ACCT_CD, as ," label=""",계정,"""",", ACCT_CD as ACCT_CD label=""계정"""
-",", ,ACCT_NM, as ," label=""",계정명,"""",", ACCT_NM as ACCT_NM label=""계정명"""
-",", ,FLD_CD, as ," label=""",분야,"""",", FLD_CD as FLD_CD label=""분야"""
-",", ,FLD_NM, as ," label=""",분야명,"""",", FLD_NM as FLD_NM label=""분야명"""
-",", ,SECT_CD, as ," label=""",부문,"""",", SECT_CD as SECT_CD label=""부문"""
-",", ,SECT_NM, as ," label=""",부문명,"""",", SECT_NM as SECT_NM label=""부문명"""
-",", ,PGM_CD, as ," label=""",프로그램,"""",", PGM_CD as PGM_CD label=""프로그램"""
-",", ,PGM_NM, as ," label=""",프로그램명,"""",", PGM_NM as PGM_NM label=""프로그램명"""
-",", ,ACTV_CD, as ," label=""",단위사업,"""",", ACTV_CD as ACTV_CD label=""단위사업"""
-",", ,ACTV_NM, as ," label=""",단위사업명,"""",", ACTV_NM as ACTV_NM label=""단위사업명"""
-",", ,CITM_CD, as ," label=""",지출목,"""",", CITM_CD as CITM_CD label=""지출목"""
-",", ,CITM_NM, as ," label=""",지출목명,"""",", CITM_NM as CITM_NM label=""지출목명"""
-",", input(,ANEXP_BDGAMT_F,", best32.) as "," label=""",세출예산액/당초지출계획액(원),"""",", input(ANEXP_BDGAMT_F, best32.) as ANEXP_BDGAMT_F label=""세출예산액/당초지출계획액(원)"""
-",", input(,ANEXP_BDGAMT_M,", best32.) as "," label=""",세출예산액/수정지출계획액(원),"""",", input(ANEXP_BDGAMT_M, best32.) as ANEXP_BDGAMT_M label=""세출예산액/수정지출계획액(원)"""
-",", input(,PREY_BFWAMT,", best32.) as "," label=""",전년도이월액(원),"""",", input(PREY_BFWAMT, best32.) as PREY_BFWAMT label=""전년도이월액(원)"""
-",", input(,OVR_EP_AMT,", best32.) as "," label=""",초과지출승인액(원),"""",", input(OVR_EP_AMT, best32.) as OVR_EP_AMT label=""초과지출승인액(원)"""
-",", input(,RSVF_EP_DCS_IAMT,", best32.) as "," label=""",예비비지출결정증액(원),"""",", input(RSVF_EP_DCS_IAMT, best32.) as RSVF_EP_DCS_IAMT label=""예비비지출결정증액(원)"""
-",", input(,RSVF_EP_DCS_MAMT,", best32.) as "," label=""",예비비지출결정감액(원),"""",", input(RSVF_EP_DCS_MAMT, best32.) as RSVF_EP_DCS_MAMT label=""예비비지출결정감액(원)"""
-",", input(,BDTR_IAMT,", best32.) as "," label=""",전용증액(원),"""",", input(BDTR_IAMT, best32.) as BDTR_IAMT label=""전용증액(원)"""
-",", input(,BDTR_MAMT,", best32.) as "," label=""",전용감액(원),"""",", input(BDTR_MAMT, best32.) as BDTR_MAMT label=""전용감액(원)"""
-",", input(,AVDV_IAMT,", best32.) as "," label=""",이용증액(원),"""",", input(AVDV_IAMT, best32.) as AVDV_IAMT label=""이용증액(원)"""
-",", input(,AVDV_MAMT,", best32.) as "," label=""",이용감액(원),"""",", input(AVDV_MAMT, best32.) as AVDV_MAMT label=""이용감액(원)"""
-",", input(,FNT_IAMT,", best32.) as "," label=""",이체증액(원),"""",", input(FNT_IAMT, best32.) as FNT_IAMT label=""이체증액(원)"""
-",", input(,FNT_MAMT,", best32.) as "," label=""",이체감액(원),"""",", input(FNT_MAMT, best32.) as FNT_MAMT label=""이체감액(원)"""
-",", input(,ANEXP_BDG_CAMT,", best32.) as "," label=""",세출예산현액/지출계획현액(원),"""",", input(ANEXP_BDG_CAMT, best32.) as ANEXP_BDG_CAMT label=""세출예산현액/지출계획현액(원)"""
-",", input(,EP_AMT,", best32.) as "," label=""",지출액(원),"""",", input(EP_AMT, best32.) as EP_AMT label=""지출액(원)"""
-",", input(,EP_NAMT,", best32.) as "," label=""",지출순액(원),"""",", input(EP_NAMT, best32.) as EP_NAMT label=""지출순액(원)"""
-",", input(,NEXT_YY_BFWAMT,", best32.) as "," label=""",다음년도이월액(원),"""",", input(NEXT_YY_BFWAMT, best32.) as NEXT_YY_BFWAMT label=""다음년도이월액(원)"""
-",", input(,DUSEAMT,", best32.) as "," label=""",불용액(원),"""",", input(DUSEAMT, best32.) as DUSEAMT label=""불용액(원)"""
+﻿지출목명,지출목,인건비,물건비,이전지출,자산취득,상환지출,전출금등,예비비
+인건비,110,1,,,0,,,
+운영비,210,,1,,0,,,
+여비,220,,1,,0,,,
+특수활동비,230,,1,,0,,,
+업무추진비,240,,1,,0,,,
+직무수행경비,250,,1,,0,,,
+연구개발비,260,,1,,0,,,
+연구용역비,260,,1,,0,,,
+보전금,310,,,1,0,,,
+민간이전,320,,,1,0,,,
+자치단체이전,330,,,1,0,,,
+해외이전,340,,,1,0,,,
+일반출연금,350,,,1,0,,,
+출연금,350,,,1,0,,,
+연구개발출연금,360,,,1,0,,,
+토지매입비,410,,,,1,,,
+건설비,420,,,,1,,,
+유형자산,430,,,,1,,,
+무형고정자산,440,,,,1,,,
+무형자산,440,,,,1,,,
+융자금,450,,,,1,,,
+출자금,460,,,,1,,,
+예치금및유가증권매입,470,,,,1,,,
+예탁금,480,,,,1,,,
+상환지출,510,,,,0,1,,
+전출금등,610,,,,0,,1,
+예비비및기타,710,,,,0,,,1
+,,,,,,,,
+,,,,,,,,
+",", input(,FSCL_YY,", best32.) as "," label=""",회계연도,"""",", input(FSCL_YY, best32.) as FSCL_YY label=""회계연도""",
+",", ,OFFC_CD, as ," label=""",소관,"""",", OFFC_CD as OFFC_CD label=""소관""",
+",", ,OFFC_NM, as ," label=""",소관명,"""",", OFFC_NM as OFFC_NM label=""소관명""",
+",", ,FSCL_CD, as ," label=""",회계,"""",", FSCL_CD as FSCL_CD label=""회계""",
+",", ,FSCL_NM, as ," label=""",회계명,"""",", FSCL_NM as FSCL_NM label=""회계명""",
+",", ,ACCT_CD, as ," label=""",계정,"""",", ACCT_CD as ACCT_CD label=""계정""",
+",", ,ACCT_NM, as ," label=""",계정명,"""",", ACCT_NM as ACCT_NM label=""계정명""",
+",", ,FLD_CD, as ," label=""",분야,"""",", FLD_CD as FLD_CD label=""분야""",
+",", ,FLD_NM, as ," label=""",분야명,"""",", FLD_NM as FLD_NM label=""분야명""",
+",", ,SECT_CD, as ," label=""",부문,"""",", SECT_CD as SECT_CD label=""부문""",
+",", ,SECT_NM, as ," label=""",부문명,"""",", SECT_NM as SECT_NM label=""부문명""",
+",", ,PGM_CD, as ," label=""",프로그램,"""",", PGM_CD as PGM_CD label=""프로그램""",
+",", ,PGM_NM, as ," label=""",프로그램명,"""",", PGM_NM as PGM_NM label=""프로그램명""",
+",", ,ACTV_CD, as ," label=""",단위사업,"""",", ACTV_CD as ACTV_CD label=""단위사업""",
+",", ,ACTV_NM, as ," label=""",단위사업명,"""",", ACTV_NM as ACTV_NM label=""단위사업명""",
+",", ,CITM_CD, as ," label=""",지출목,"""",", CITM_CD as CITM_CD label=""지출목""",
+",", ,CITM_NM, as ," label=""",지출목명,"""",", CITM_NM as CITM_NM label=""지출목명""",
+",", input(,ANEXP_BDGAMT_F,", best32.) as "," label=""",세출예산액/당초지출계획액(원),"""",", input(ANEXP_BDGAMT_F, best32.) as ANEXP_BDGAMT_F label=""세출예산액/당초지출계획액(원)""",
+",", input(,ANEXP_BDGAMT_M,", best32.) as "," label=""",세출예산액/수정지출계획액(원),"""",", input(ANEXP_BDGAMT_M, best32.) as ANEXP_BDGAMT_M label=""세출예산액/수정지출계획액(원)""",
+",", input(,PREY_BFWAMT,", best32.) as "," label=""",전년도이월액(원),"""",", input(PREY_BFWAMT, best32.) as PREY_BFWAMT label=""전년도이월액(원)""",
+",", input(,OVR_EP_AMT,", best32.) as "," label=""",초과지출승인액(원),"""",", input(OVR_EP_AMT, best32.) as OVR_EP_AMT label=""초과지출승인액(원)""",
+",", input(,RSVF_EP_DCS_IAMT,", best32.) as "," label=""",예비비지출결정증액(원),"""",", input(RSVF_EP_DCS_IAMT, best32.) as RSVF_EP_DCS_IAMT label=""예비비지출결정증액(원)""",
+",", input(,RSVF_EP_DCS_MAMT,", best32.) as "," label=""",예비비지출결정감액(원),"""",", input(RSVF_EP_DCS_MAMT, best32.) as RSVF_EP_DCS_MAMT label=""예비비지출결정감액(원)""",
+",", input(,BDTR_IAMT,", best32.) as "," label=""",전용증액(원),"""",", input(BDTR_IAMT, best32.) as BDTR_IAMT label=""전용증액(원)""",
+",", input(,BDTR_MAMT,", best32.) as "," label=""",전용감액(원),"""",", input(BDTR_MAMT, best32.) as BDTR_MAMT label=""전용감액(원)""",
+",", input(,AVDV_IAMT,", best32.) as "," label=""",이용증액(원),"""",", input(AVDV_IAMT, best32.) as AVDV_IAMT label=""이용증액(원)""",
+",", input(,AVDV_MAMT,", best32.) as "," label=""",이용감액(원),"""",", input(AVDV_MAMT, best32.) as AVDV_MAMT label=""이용감액(원)""",
+",", input(,FNT_IAMT,", best32.) as "," label=""",이체증액(원),"""",", input(FNT_IAMT, best32.) as FNT_IAMT label=""이체증액(원)""",
+",", input(,FNT_MAMT,", best32.) as "," label=""",이체감액(원),"""",", input(FNT_MAMT, best32.) as FNT_MAMT label=""이체감액(원)""",
+",", input(,ANEXP_BDG_CAMT,", best32.) as "," label=""",세출예산현액/지출계획현액(원),"""",", input(ANEXP_BDG_CAMT, best32.) as ANEXP_BDG_CAMT label=""세출예산현액/지출계획현액(원)""",
+",", input(,EP_AMT,", best32.) as "," label=""",지출액(원),"""",", input(EP_AMT, best32.) as EP_AMT label=""지출액(원)""",
+",", input(,EP_NAMT,", best32.) as "," label=""",지출순액(원),"""",", input(EP_NAMT, best32.) as EP_NAMT label=""지출순액(원)""",
+",", input(,NEXT_YY_BFWAMT,", best32.) as "," label=""",다음년도이월액(원),"""",", input(NEXT_YY_BFWAMT, best32.) as NEXT_YY_BFWAMT label=""다음년도이월액(원)""",
+",", input(,DUSEAMT,", best32.) as "," label=""",불용액(원),"""",", input(DUSEAMT, best32.) as DUSEAMT label=""불용액(원)""",

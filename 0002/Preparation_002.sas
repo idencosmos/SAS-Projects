@@ -4,112 +4,6 @@
 libname &lib "&dir";
 
 proc sql;
-create table J001 as
-select coalesce(a.FSCL_YY, b.FSCL_YY) as FSCL_YY
-, coalesce(a.OFFC_CD, b.OFFC_CD) as OFFC_CD
-, coalesce(a.OFFC_NM, b.OFFC_NM) as OFFC_NM
-, coalesce(a.FSCL_CD, b.FSCL_CD) as FSCL_CD
-, coalesce(a.FSCL_NM, b.FSCL_NM) as FSCL_NM
-, coalesce(a.FLD_CD, b.FLD_CD) as FLD_CD
-, coalesce(a.FLD_NM, b.FLD_NM) as FLD_NM
-, coalesce(a.SECT_CD, b.SECT_CD) as SECT_CD
-, coalesce(a.SECT_NM, b.SECT_NM) as SECT_NM
-, coalesce(a.PGM_CD, b.PGM_CD) as PGM_CD
-, coalesce(a.PGM_NM, b.PGM_NM) as PGM_NM
-, coalesce(a.ACTV_CD, b.ACTV_CD) as ACTV_CD
-, coalesce(a.ACTV_NM, b.ACTV_NM) as ACTV_NM
-, a.v8
-, a.v9
-, a.v10
-, a.v11
-, a.v12
-, a.v13
-, a.v14
-, a.v21
-, b.w10
-, b.w11
-, b.w14
-, b.v15
-, b.v16
-, b.v17
-, b.v18
-, b.v19
-, b.v20
-, b.v22
-from
-&lib..var003 as a
-full join
-&lib..var004 as b on a.FSCL_YY=b.FSCL_YY
-and a.OFFC_CD=b.OFFC_CD
-and a.OFFC_NM=b.OFFC_NM
-and a.FSCL_CD=b.FSCL_CD
-and a.FSCL_NM=b.FSCL_NM
-and a.FLD_CD=b.FLD_CD
-and a.FLD_NM=b.FLD_NM
-and a.SECT_CD=b.SECT_CD
-and a.SECT_NM=b.SECT_NM
-and a.PGM_CD=b.PGM_CD
-and a.PGM_NM=b.PGM_NM
-and a.ACTV_CD=b.ACTV_CD
-and a.ACTV_NM=b.ACTV_NM;
-quit;
-run;
-
-proc sql;
-create table J002 as
-select coalesce(a.FSCL_YY, b.FSCL_YY) as FSCL_YY
-, coalesce(a.OFFC_CD, b.OFFC_CD) as OFFC_CD
-, coalesce(a.OFFC_NM, b.OFFC_NM) as OFFC_NM
-, coalesce(a.FSCL_CD, b.FSCL_CD) as FSCL_CD
-, coalesce(a.FSCL_NM, b.FSCL_NM) as FSCL_NM
-, coalesce(a.FLD_CD, b.FLD_CD) as FLD_CD
-, coalesce(a.FLD_NM, b.FLD_NM) as FLD_NM
-, coalesce(a.SECT_CD, b.SECT_CD) as SECT_CD
-, coalesce(a.SECT_NM, b.SECT_NM) as SECT_NM
-, coalesce(a.PGM_CD, b.PGM_CD) as PGM_CD
-, coalesce(a.PGM_NM, b.PGM_NM) as PGM_NM
-, coalesce(a.ACTV_CD, b.ACTV_CD) as ACTV_CD
-, coalesce(a.ACTV_NM, b.ACTV_NM) as ACTV_NM
-, a.v8
-, a.v9
-, a.v10
-, a.v11
-, a.v12
-, a.v13
-, a.v14
-, a.v21
-, a.w10
-, a.w11
-, a.w14
-, a.v15
-, a.v16
-, a.v17
-, a.v18
-, a.v19
-, a.v20
-, a.v22
-, b.v23
-, b.v24
-from
-J001 as a
-full join
-&lib..var005 as b on a.FSCL_YY=b.FSCL_YY
-and a.OFFC_CD=b.OFFC_CD
-and a.OFFC_NM=b.OFFC_NM
-and a.FSCL_CD=b.FSCL_CD
-and a.FSCL_NM=b.FSCL_NM
-and a.FLD_CD=b.FLD_CD
-and a.FLD_NM=b.FLD_NM
-and a.SECT_CD=b.SECT_CD
-and a.SECT_NM=b.SECT_NM
-and a.PGM_CD=b.PGM_CD
-and a.PGM_NM=b.PGM_NM
-and a.ACTV_CD=b.ACTV_CD
-and a.ACTV_NM=b.ACTV_NM;
-quit;
-run;
-
-proc sql;
 create table J003 as
 select coalesce(a.FSCL_YY, b.FSCL_YY) as FSCL_YY
 , coalesce(a.OFFC_CD, b.OFFC_CD) as OFFC_CD
@@ -132,12 +26,36 @@ select coalesce(a.FSCL_YY, b.FSCL_YY) as FSCL_YY
 , b.w3
 , b.w4
 , b.w5
-, a.v8
-, a.v9
+, a.v80
+, a.v90
+, a.v81
+, a.v91
+, a.v82
+, a.v92
+, a.v83
+, a.v93
+, a.v84
+, a.v94
+, a.v85
+, a.v95
+, a.v86
+, a.v96
 , a.v10
 , a.v11
-, a.v12
-, a.v13
+, a.v100
+, a.v110
+, a.v101
+, a.v111
+, a.v102
+, a.v112
+, a.v103
+, a.v113
+, a.v104
+, a.v114
+, a.v105
+, a.v115
+, a.v106
+, a.v116
 , a.v14
 , a.v21
 , a.w10
@@ -153,7 +71,7 @@ select coalesce(a.FSCL_YY, b.FSCL_YY) as FSCL_YY
 , a.v23
 , a.v24
 from
-J002 as a
+&lib..var345 as a
 full join
 &lib..var001 as b on a.FSCL_YY=b.FSCL_YY
 and a.OFFC_CD=b.OFFC_CD
@@ -196,12 +114,36 @@ select coalesce(a.FSCL_YY, b.FSCL_YY) as FSCL_YY
 , a.w5
 , b.v6
 , b.v7
-, a.v8
-, a.v9
+, a.v80
+, a.v90
+, a.v81
+, a.v91
+, a.v82
+, a.v92
+, a.v83
+, a.v93
+, a.v84
+, a.v94
+, a.v85
+, a.v95
+, a.v86
+, a.v96
 , a.v10
 , a.v11
-, a.v12
-, a.v13
+, a.v100
+, a.v110
+, a.v101
+, a.v111
+, a.v102
+, a.v112
+, a.v103
+, a.v113
+, a.v104
+, a.v114
+, a.v105
+, a.v115
+, a.v106
+, a.v116
 , a.v14
 , a.v21
 , a.w10
