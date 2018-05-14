@@ -77,7 +77,7 @@ var006
 
 var007
   CITM_CD_Cate: 지출목 분류
-  DUSEAMT_Per: 불용액/세출예산현
+  DUSEAMT_Per: 불용액/세출예산현액
 ---
 
 ### M01
