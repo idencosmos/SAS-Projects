@@ -105,7 +105,9 @@ select coalesce(a.FSCL_YY, b.FSCL_YY) as FSCL_YY
 , a.ACTV_CD
 , coalesce(a.ACTV_NM, b.ACTV_NM) as ACTV_NM
 , a.v1
+, SUM(v1)/SUM(w3) as w1
 , a.v2
+, SUM(v2)/SUM(w3) as w2
 , a.v3
 , a.v4
 , a.v5
@@ -168,5 +170,20 @@ and a.FLD_NM=b.FLD_NM
 and a.SECT_NM=b.SECT_NM
 and a.PGM_NM=b.PGM_NM
 and a.ACTV_NM=b.ACTV_NM;
+quit;
+run;
+
+proc sql;
+create table &lib..M02 as
+select *
+, case when FSCL_YY>2007 and FSCL_YY<2013 then 1 else 0 end as x1
+, case when FSCL_YY>2012 and FSCL_YY<2018 then 1 else 0 end as x2
+, case when FSCL_YY=2008 or FSCL_YY=2013 then 1 else 0 end as x3
+, case when FSCL_YY=2008 or FSCL_YY=2009 or FSCL_YY=2013 or FSCL_YY=2014 then 1 else 0 end as x4
+, case when v6>0 then 1 else 0 end as x5
+, case when v6<0 then 1 else 0 end as x6
+, w4-w1 as x7
+, w5-w2 as x8
+from &lib..M01;
 quit;
 run;
