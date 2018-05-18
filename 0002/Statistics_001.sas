@@ -212,5 +212,70 @@ run;
 
 proc glm data=&lib..M01;
 class v22 FSCL_YY OFFC_NM;
-model v21=v7 v19 v15 v24 v100 v101 v102 v103 v104 v105 v106 w4 w5 v22 FSCL_YY OFFC_NM/solution noint;
+model v21=v7 v19 v15 v24 v100 v101 v102 v103 v104 v105 v106 x7 x8 v22 FSCL_YY OFFC_NM/solution noint;
+run;
+
+
+
+/*reg04/x6를 이용, 더미변수가 증감액의 감소*/
+proc glm data=&lib..M02;
+class v22 FSCL_YY OFFC_NM;
+model v21=v7 x6 v7*x6 v19 v15 v24 v100 v101 v102 v103 v104 v105 v106 v22 FSCL_YY OFFC_NM/solution noint;
+run;
+
+proc glm data=&lib..M02;
+class v22 FSCL_YY OFFC_NM;
+model v21=v7 x6 v7*x6 v19 v15 v24 v100 v101 v102 v103 v104 v105 v106 x7 x8 FSCL_YY OFFC_NM/solution noint;
+run;
+
+
+
+/*reg04/x5를 이용, 더미변수가 증감액의 증가*/
+proc glm data=&lib..M02;
+class v22 FSCL_YY OFFC_NM;
+model v21=v7 x5 v7*x5 v19 v15 v24 v100 v101 v102 v103 v104 v105 v106 v22 FSCL_YY OFFC_NM/solution noint;
+run;
+
+proc glm data=&lib..M02;
+class v22 FSCL_YY OFFC_NM;
+model v21=v7 x5 v7*x5 v19 v15 v24 v100 v101 v102 v103 v104 v105 v106 x7 x8 FSCL_YY OFFC_NM/solution noint;
+run;
+
+
+
+/*reg05*/
+proc glm data=&lib..M02;
+class v22 FSCL_YY OFFC_NM;
+model v21=v7 x7 v7*x7 x8 v19 v15 v24 v100 v101 v102 v103 v104 v105 v106 FSCL_YY OFFC_NM/solution noint;
+run;
+
+proc glm data=&lib..M02;
+class v22 FSCL_YY OFFC_NM;
+model v21=v7 x8 v7*x8 x7 v19 v15 v24 v100 v101 v102 v103 v104 v105 v106 FSCL_YY OFFC_NM/solution noint;
+run;
+
+
+
+/*reg06/정권초: 정권 1년차*/
+proc glm data=&lib..M02;
+class v22 FSCL_YY OFFC_NM;
+model v21=v7 x3 v7*x3 v19 v15 v24 v100 v101 v102 v103 v104 v105 v106 v22 FSCL_YY OFFC_NM/solution noint;
+run;
+
+proc glm data=&lib..M02;
+class v22 FSCL_YY OFFC_NM;
+model v21=v7 x3 v7*x3 v19 v15 v24 v100 v101 v102 v103 v104 v105 v106 x7 x8 FSCL_YY OFFC_NM/solution noint;
+run;
+
+
+
+/*reg06/정권초: 정권 1, 2년차*/
+proc glm data=&lib..M02;
+class v22 FSCL_YY OFFC_NM;
+model v21=v7 x4 v7*x4 v19 v15 v24 v100 v101 v102 v103 v104 v105 v106 v22 FSCL_YY OFFC_NM/solution noint;
+run;
+
+proc glm data=&lib..M02;
+class v22 FSCL_YY OFFC_NM;
+model v21=v7 x4 v7*x4 v19 v15 v24 v100 v101 v102 v103 v104 v105 v106 x7 x8 FSCL_YY OFFC_NM/solution noint;
 run;
