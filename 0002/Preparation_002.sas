@@ -26,6 +26,18 @@ select coalesce(a.FSCL_YY, b.FSCL_YY) as FSCL_YY
 , b.w3
 , b.w4
 , b.w5
+, b.m1
+, b.m2
+, b.q11
+, b.q13
+, b.q21
+, b.q23
+, b.x10
+, b.x11
+, b.x12
+, b.x13
+, b.x14
+, b.x15
 , a.v80
 , a.v90
 , a.v81
@@ -114,6 +126,18 @@ select coalesce(a.FSCL_YY, b.FSCL_YY) as FSCL_YY
 , a.w3
 , a.w4
 , a.w5
+, a.m1
+, a.m2
+, a.q11
+, a.q13
+, a.q21
+, a.q23
+, a.x10
+, a.x11
+, a.x12
+, a.x13
+, a.x14
+, a.x15
 , b.v6
 , b.v7
 , a.v80
@@ -174,7 +198,7 @@ quit;
 run;
 
 proc sql;
-create table &lib..M02 as
+create table M02_pre as
 select *
 , case when FSCL_YY>2007 and FSCL_YY<2013 then 1 else 0 end as x1
 , case when FSCL_YY>2012 and FSCL_YY<2018 then 1 else 0 end as x2
@@ -184,6 +208,19 @@ select *
 , case when v6<0 then 1 else 0 end as x6
 , w4-w1 as x7
 , w5-w2 as x8
+, case when FSCL_YY=2008 or FSCL_YY=2013 then 1
+when FSCL_YY=2009 or FSCL_YY=2014 then 2
+when FSCL_YY=2010 or FSCL_YY=2015 then 3
+when FSCL_YY=2011 or FSCL_YY=2016 then 4
+when FSCL_YY=2012 or FSCL_YY=2017 then 5 else . end as x9
 from &lib..M01;
+quit;
+run;
+
+proc sql;
+  create table &lib..M02 as
+  select a.*, b._NAME5 as x16
+  from M02_pre as a left join &lib..longdata_GDP as b
+  on a.FSCL_YY=b._NAME5__NAME6;
 quit;
 run;

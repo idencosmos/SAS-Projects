@@ -4,7 +4,7 @@
 libname &lib "&dir";
 
 proc sql;
-create table &lib..var001 as
+create table J002 as
 select *, v1/v3 as v4, v1/w3 as w4, v2/v3 as v5, v2/w3 as w5 from
 (
 select distinct FSCL_YY
@@ -40,6 +40,87 @@ group by FSCL_YY
 , ACTV_NM
 )
 ;
+quit;
+run;
+
+proc sql;
+  create table med_001 as
+  select *
+  , median(v1) as m1
+  , median(v2) as m2
+  from J002
+  group by FSCL_YY;
+quit;
+run;
+
+proc sql;
+  create table med_002 as
+  select *
+  , median(v1) as q11
+  from med_001
+  where v1>m1
+  group by FSCL_YY;
+quit;
+run;
+
+proc sql;
+  create table med_003 as
+  select *
+  , median(v1) as q13
+  from med_001
+  where v1<m1
+  group by FSCL_YY;
+quit;
+run;
+
+proc sql;
+  create table med_004 as
+  select *
+  , median(v2) as q21
+  from med_001
+  where v2>m2
+  group by FSCL_YY;
+quit;
+run;
+
+proc sql;
+  create table med_005 as
+  select *
+  , median(v2) as q23
+  from med_001
+  where v2<m2
+  group by FSCL_YY;
+quit;
+run;
+
+data med_total;
+  merge med_001-med_005 J002;
+  by FSCL_YY
+  OFFC_CD
+  OFFC_NM
+  FSCL_CD
+  FSCL_NM
+  FLD_CD
+  FLD_NM
+  SECT_CD
+  SECT_NM
+  PGM_CD
+  PGM_NM
+  ACTV_CD
+  ACTV_NM;
+run;
+
+proc sql;
+  create table &lib..var001 as
+  select *
+  , case when m1^=. and v1>m1 then 1 else 0 end as x10
+  , case when q11^=. and v1>q11 then 1 else 0 end as x11
+  , case when q13^=. and v1<q13 then 1 else 0 end as x12
+  , case when m2^=. and v2>m2 then 1 else 0 end as x13
+  , case when q21^=. and v2>q21 then 1 else 0 end as x14
+  , case when q23^=. and v2<q23 then 1 else 0 end as x15
+  from med_total
+  where FSCL_YY<2018;
 quit;
 run;
 

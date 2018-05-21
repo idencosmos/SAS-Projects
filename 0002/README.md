@@ -17,7 +17,12 @@ var001
   w4: v1/w3; 10~12월 평균 집행액/단위사업 집행액(년)
   v5: v2/v3
   w5: v2/w3; 1~3월 평균 집행액/단위사업 집행액(년)
-
+  m1: v1 중앙값
+  m2: v2 중앙값
+  q11: v1 1분위수
+  q13: v1 3분위수
+  q21: v2 1분위수
+  q23: v2 3분위수
 
 var002
   v6: 금년도국회확정안-금년도정부안
@@ -87,6 +92,14 @@ M02
   x6: 국회증감액 감소
   x7: 단위사업 10~12월 평균 집행금액 전체와 차이
   x8: 단위사업 1~3월 평균 집행금액 전체와 차이
+  x9: 정권 년차
+  x10: 연말 집행금액 중앙값 초과
+  x11: 연말 집행금액 1분위수 초과
+  x12: 연말 집행금액 3분위수 미만
+  x13: 연초 집행금액 중앙값 초과
+  x14: 연초 집행금액 1분위수 초과
+  x15: 연초 집행금액 3분위수 미만
+  x16: GDP 성장률
 
 var007
   CITM_CD_Cate: 지출목 분류
@@ -181,3 +194,54 @@ v10*: 지춟분류 세출예산현액/전체 세출예산현액
 v22; 특별회계, 기금, 일반회계, 기타 더미변수
 Year fixed
 소관 fixed
+
+
+---
+
+1. 불용액이 정권초기에 더 많은가?
+
+종속변수: v21; 불용액비율
+독립변수: x9; 정권년차(Dummy)
+통제변수: v19 v15 v24 v100 v101 v102 v103 v104 v105 v106 v22(Dummy) OFFC_NM(Dummy) FSCL_YY(Dummy) or x16
+
+종속변수: v21; 불용액비율
+독립변수: x9; 정권년차
+통제변수: v19 v15 v24 v100 v101 v102 v103 v104 v105 v106 v22(Dummy) OFFC_NM(Dummy) FSCL_YY(Dummy) or x16
+
+2. 국회에서 증액된 예산(쪽지예산)은 비효율적으로 집행되는가?
+
+종속변수: v21; 불용액비율
+독립변수: v7; 국회증감비율 x5; 국회증가(Dummy) / 0 포함
+통제변수: v19 v15 v24 v100 v101 v102 v103 v104 v105 v106 v22(Dummy) OFFC_NM(Dummy) FSCL_YY(Dummy) or x16
+
+종속변수: v21; 불용액비율
+독립변수: v7; 국회증감비율 x5; 국회증가(Dummy) / 0 제외
+통제변수: v19 v15 v24 v100 v101 v102 v103 v104 v105 v106 v22(Dummy) OFFC_NM(Dummy) FSCL_YY(Dummy) or x16
+
+3. 연말에 집중해서 집행되는 예산은 비효율적인가?
+
+종속변수: v21; 불용액비율
+독립변수: x7
+통제변수: v19 v15 v24 v100 v101 v102 v103 v104 v105 v106 v22(Dummy) OFFC_NM(Dummy) FSCL_YY(Dummy) or x16
+
+종속변수: v21; 불용액비율
+독립변수: v7 x5(Dummy) x11(Dummy) / 1분위수 초과
+통제변수: v19 v15 v24 v100 v101 v102 v103 v104 v105 v106 v22(Dummy) OFFC_NM(Dummy) FSCL_YY(Dummy) or x16
+
+종속변수: v21; 불용액비율
+독립변수: v7 x5(Dummy) x10(Dummy) / 중앙값 초과
+통제변수: v19 v15 v24 v100 v101 v102 v103 v104 v105 v106 v22(Dummy) OFFC_NM(Dummy) FSCL_YY(Dummy) or x16
+
+4. 연초에 집행되지 않는 예산은 비효율적인가?
+
+종속변수: v21; 불용액비율
+독립변수: x8
+통제변수: v19 v15 v24 v100 v101 v102 v103 v104 v105 v106 v22(Dummy) OFFC_NM(Dummy) FSCL_YY(Dummy) or x16
+
+종속변수: v21; 불용액비율
+독립변수: v7 x5(Dummy) x15(Dummy) / 3분위수 미만
+통제변수: v19 v15 v24 v100 v101 v102 v103 v104 v105 v106 v22(Dummy) OFFC_NM(Dummy) FSCL_YY(Dummy) or x16
+
+종속변수: v21; 불용액비율
+독립변수: v7 x5(Dummy) x13(Dummy) / 중앙값 초과
+통제변수: v19 v15 v24 v100 v101 v102 v103 v104 v105 v106 v22(Dummy) OFFC_NM(Dummy) FSCL_YY(Dummy) or x16
