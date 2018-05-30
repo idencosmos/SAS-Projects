@@ -1,0 +1,70 @@
+%let dir=D:\OneDrive\Github\SAS-Projects\0003\;
+%let lib=A0003;
+%let String01=NjdhZTg3ZTM1OGEzZGMyOGIyZWE0ZmIxZTBiMDg0ZTg=;/*apiKey*/
+libname &lib "&dir";
+
+data &lib..D_002_01;
+set &lib..RD_002_01(keep=PRD_DE C1_NM C1 C2_NM C2 C3_NM C3 ITM_NM DT UNIT_NM);
+v1=PRD_DE+0;
+v2=C1_NM;
+v3=C1;
+v4=C2_NM;
+v5=C2+0;
+v6=C3_NM;
+v7=C3+0;
+v8=ITM_NM;
+v9=DT+0;
+v10=UNIT_NM;
+keep v1-v10;
+run;
+
+data &lib..D_003_02;
+set &lib..RD_003_02(keep=PRD_DE C1_NM C1 C2_NM C2 ITM_NM DT);
+v1=PRD_DE;
+v2=C1_NM;
+v3=C1;
+v4=C2_NM;
+v5=C2;
+v8=ITM_NM;
+v9=DT+0;
+keep v1-v10;
+run;
+
+data &lib..D_005_01;
+set &lib..RD_005_01(keep=PRD_DE C1_NM C1 C2_NM C2 C3_NM C3 ITM_NM DT UNIT_NM);
+v1=PRD_DE+0;
+v2=C1_NM;
+v3=C1;
+v4=C2_NM;
+v5=C2;
+v6=C3_NM;
+v7=C3;
+v8=ITM_NM;
+v9=DT+0;
+v10=UNIT_NM;
+keep v1-v10;
+run;
+
+data &lib..D_006_01;
+set &lib..RD_006_01(keep=PRD_DE C1_NM C1 ITM_NM DT UNIT_NM);
+v1=PRD_DE+0;
+v2=C1_NM;
+v3=C1;
+v8=ITM_NM;
+v9=DT+0;
+v10=UNIT_NM;
+keep v1-v10;
+run;
+
+data &lib..D_007_01;
+set &lib..RD_007_01(keep=PRD_DE C1_NM C1 C2_NM C2 ITM_NM DT UNIT_NM);
+v1=PRD_DE+0;
+v2=C1_NM;
+v3=C1;
+v4=C2_NM;
+v5=C2;
+v8=ITM_NM;
+v9=DT+0;
+v10=UNIT_NM;
+keep v1-v10;
+run;

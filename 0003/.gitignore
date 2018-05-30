@@ -1,0 +1,4 @@
+*.sas7bdat
+*.sas7bdat.lck
+*.txt
+*.hwp

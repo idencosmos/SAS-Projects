@@ -1,3 +1,25 @@
+1. 전체 주택 수의 변화 / 국토교통부, 주택보급률
+2. 최저주거기준 미달 가구 / 인구주택총조사(?)
+3. 아파트 가격지수 / 한국감정원, 월간주택가격동향 및 주간아파트가격동 or 국토교통부 전국주택가격동향조사
+4. 소득 대비 주택 가격(PIR) 비교 /
+5. 가계 자산 비중(한국/다른 나라와 비교) /통계청 가계금융 및 복지조사
+6. 주택보급률과 주택 건설 호수 추이 /
+7. 점유 형태별 가구 수 비율 / 국토교통부 주거실태조사
+8. 실효세율 비교 /
+9. 총세액 중 보유세 비중 /
+10. 보유세 비중의 변화 추이 /
+
+D_001_01: (신)주택보급률 / 2005-2016
+D_001_02: (종전)주택보급률 / 1995-2014
+D_002_01: 총조사 주택총괄(행정구역/주택의 종류/거주가구수/총방수별) / 1975-2005
+D_003_02: 유형별 주택매매가격지수(2011.6=100) / 198601-201212
+D_005_01: 시도별 자산 부채 소득 현황 / 2012-2017
+D_006_01: 지역별 주택건설 인허가실적 / 1990-2017
+D_006_02: 전용면적사용검사실적_월계 / 201007-201803
+D_007_01: (일반가구)지역별 소득계층별 점유형태(2006~2016) / 2006-2016
+
+---
+
 ### 분류기준
 지역(수도권): 서울특별시(서울), 인천광역시(인천), 경기도(경기)
 건축물 용도: 주거용, 상업용, 공업용, 문교사회용, 기타
@@ -299,3 +321,30 @@
  택지예정지구지정 및 공급현황
 •  시행자별 택지지정 및 공급현황 (1991 - 2017)
 •  지역별 택지지정 및 공급현황 (1991 - 2017)
+
+---
+
+참고 코드
+
+%MACRO KOSISM(LEVEL, OBJ1, OBJ2, OBJ3, ORG,DATE_s,DATE_E,TABLE);
+DATA FINAL;RUN;
+%DO DATE=&DATE_S %TO &DATE_E;
+   %DO I=1 %TO 12;
+    DATA _NULL_;
+   IF &I<10 THEN  DO; CALL SYMPUT("DATE2", COMPRESS(&DATE||"0"||&I));END;
+   ELSE DO;CALL SYMPUT("DATE2", COMPRESS(&DATE||&I)); END;
+   RUN;
+
+%let url=http://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey=NDE3M2QyZjI0MWFiMzkzN2RlNDgxZWVhOTMyMzdmZTQ=&itmId=&LEVEL&objL1=&OBJ1&objL2=&OBJ2&objL3=&OBJ3&objL4=&objL5=&objL6=&objL7=&objL8=&format=json&jsonVD=Y&prdSe=M;
+%let dtable=&startPrdDe=&DATE2&endPrdDe=&DATE2&loadGubun=2&orgId=&ORG&tblId=&TABLE;
+filename out temp;
+proc http url="&url.&DTABLE" method="get" out=out;run;
+libname RAW JSON FILEREF=OUT;
+DATA TEMP;SET RAW.ALLDATA;IF P1='TBL_NM' THEN GROUP+1;
+RUN;
+PROC TRANSPOSE DATA=TEMP OUT=TEMP2;BY GROUP;ID P1;VAR VALUE;RUN;
+DATA FINAL;SET FINAL TEMP2;
+RUN;
+%END;
+%END;
+%MEND;
