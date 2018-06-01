@@ -26,6 +26,23 @@ model v21=v7 x5 v7*x5 v19 v15 v24 v100 v101 v102 v103 v104 v105 v106 v22 OFFC_NM
 where v7^=0;
 run;
 
+proc glm data=&lib..M02;
+  class v22 OFFC_NM;
+  model v21=x5 v19 v15 v24 v100 v101 v102 v103 v104 v105 v106 v22 OFFC_NM x16/solution;
+run;
+
+proc glm data=&lib..M02;
+  class v22 OFFC_NM;
+  model v21=x5 v19 v15 v24 v100 v101 v102 v103 v104 v105 v106 v22 OFFC_NM x16/solution;
+  where v7^=0;
+run;
+
+proc ttest data=&lib..M02;
+  class x5;
+  var v21;
+  where x7^=0;
+run;
+
 /*3. 연말에 집중해서 집행되는 예산은 비효율적인가?*/
 proc glm data=&lib..M02;
 class v22 OFFC_NM;

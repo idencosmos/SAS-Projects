@@ -82,6 +82,27 @@ select coalesce(a.FSCL_YY, b.FSCL_YY) as FSCL_YY
 , a.v22
 , a.v23
 , a.v24
+, a.v70
+, a.v71
+, a.v72
+, a.v73
+, a.v74
+, a.v75
+, a.v76
+, a.v120
+, a.v121
+, a.v122
+, a.v123
+, a.v124
+, a.v125
+, a.v126
+, a.v130
+, a.v131
+, a.v132
+, a.v133
+, a.v134
+, a.v135
+, a.v136
 from
 &lib..var345 as a
 full join
@@ -184,6 +205,27 @@ select coalesce(a.FSCL_YY, b.FSCL_YY) as FSCL_YY
 , a.v22
 , a.v23
 , a.v24
+, a.v70
+, a.v71
+, a.v72
+, a.v73
+, a.v74
+, a.v75
+, a.v76
+, a.v120
+, a.v121
+, a.v122
+, a.v123
+, a.v124
+, a.v125
+, a.v126
+, a.v130
+, a.v131
+, a.v132
+, a.v133
+, a.v134
+, a.v135
+, a.v136
 from
 J003 as a
 full join

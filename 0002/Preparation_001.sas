@@ -145,7 +145,7 @@ run;
 
 proc sql;
 create table &lib..var003 as
-select *, v14/v10 as v21, v80/v10 as v100, v90/v11 as v110, v81/v10 as v101, v91/v11 as v111, v82/v10 as v102, v92/v11 as v112, v83/v10 as v103, v93/v11 as v113, v84/v10 as v104, v94/v11 as v114, v85/v10 as v105, v95/v11 as v115, v86/v10 as v106, v96/v11 as v116 from
+select *, v14/v10 as v21, v80/v10 as v100, v90/v11 as v110, v81/v10 as v101, v91/v11 as v111, v82/v10 as v102, v92/v11 as v112, v83/v10 as v103, v93/v11 as v113, v84/v10 as v104, v94/v11 as v114, v85/v10 as v105, v95/v11 as v115, v86/v10 as v106, v96/v11 as v116, v70/v10 as v120, v71/v10 as v121, v72/v10 as v122, v73/v10 as v123, v74/v10 as v124, v75/v10 as v125, v76/v10 as v126, v70/v14 as v130, v71/v14 as v131, v72/v14 as v132, v73/v14 as v133, v74/v14 as v134, v75/v14 as v135, v76/v14 as v136 from
 (
 select distinct FSCL_YY
 , OFFC_CD
@@ -161,18 +161,25 @@ select distinct FSCL_YY
 , ACTV_CD
 , ACTV_NM
 , sum(DUSEAMT) as v14
+, sum(case when CITM_CD='110' then DUSEAMT else 0 end) as v70
 , sum(case when CITM_CD='110' then ANEXP_BDG_CAMT else 0 end) as v80
 , sum(case when CITM_CD='110' then EP_AMT else 0 end) as v90
+, sum(case when CITM_CD='210' or CITM_CD='220' or CITM_CD='230' or CITM_CD='240' or CITM_CD='250' or CITM_CD='260' then DUSEAMT else 0 end) as v71
 , sum(case when CITM_CD='210' or CITM_CD='220' or CITM_CD='230' or CITM_CD='240' or CITM_CD='250' or CITM_CD='260' then ANEXP_BDG_CAMT else 0 end) as v81
 , sum(case when CITM_CD='210' or CITM_CD='220' or CITM_CD='230' or CITM_CD='240' or CITM_CD='250' or CITM_CD='260' then EP_AMT else 0 end) as v91
+, sum(case when CITM_CD='310' or CITM_CD='320' or CITM_CD='330' or CITM_CD='340' or CITM_CD='350' or CITM_CD='360' then DUSEAMT else 0 end) as v72
 , sum(case when CITM_CD='310' or CITM_CD='320' or CITM_CD='330' or CITM_CD='340' or CITM_CD='350' or CITM_CD='360' then ANEXP_BDG_CAMT else 0 end) as v82
 , sum(case when CITM_CD='310' or CITM_CD='320' or CITM_CD='330' or CITM_CD='340' or CITM_CD='350' or CITM_CD='360' then EP_AMT else 0 end) as v92
+, sum(case when CITM_CD='410' or CITM_CD='420' or CITM_CD='430' or CITM_CD='440' or CITM_CD='450' or CITM_CD='460' or CITM_CD='470' or CITM_CD='480' then DUSEAMT else 0 end) as v73
 , sum(case when CITM_CD='410' or CITM_CD='420' or CITM_CD='430' or CITM_CD='440' or CITM_CD='450' or CITM_CD='460' or CITM_CD='470' or CITM_CD='480' then ANEXP_BDG_CAMT else 0 end) as v83
 , sum(case when CITM_CD='410' or CITM_CD='420' or CITM_CD='430' or CITM_CD='440' or CITM_CD='450' or CITM_CD='460' or CITM_CD='470' or CITM_CD='480' then EP_AMT else 0 end) as v93
+, sum(case when CITM_CD='510' then DUSEAMT else 0 end) as v74
 , sum(case when CITM_CD='510' then ANEXP_BDG_CAMT else 0 end) as v84
 , sum(case when CITM_CD='510' then EP_AMT else 0 end) as v94
+, sum(case when CITM_CD='610' then DUSEAMT else 0 end) as v75
 , sum(case when CITM_CD='610' then ANEXP_BDG_CAMT else 0 end) as v85
 , sum(case when CITM_CD='610' then EP_AMT else 0 end) as v95
+, sum(case when CITM_CD='710' then DUSEAMT else 0 end) as v76
 , sum(case when CITM_CD='710' then ANEXP_BDG_CAMT else 0 end) as v86
 , sum(case when CITM_CD='710' then EP_AMT else 0 end) as v96
 , sum(ANEXP_BDG_CAMT) as v10
@@ -198,7 +205,7 @@ run;
 
 proc sql;
 create table &lib..var004 as
-select a.*, b.w10, b.w11, b.w14, (a.v10-b.w10)/a.v10 as v15, (a.v11-b.w11)/a.v11 as v16, a.v10-b.w10 as v17, a.v11-b.w11 as v18, b.w14/b.w10 as v19, a.v14-b.w14 as v20, case
+select a.*, b.w10, b.w11, b.w14, (a.v10-b.w10)/b.w10 as v15, (a.v11-b.w11)/a.v11 as v16, a.v10-b.w10 as v17, a.v11-b.w11 as v18, b.w14/b.w10 as v19, a.v14-b.w14 as v20, case
 when input(a.FSCL_CD, best32.)>200 and input(a.FSCL_CD, best32.)<400 then '특별회계'
 when input(a.FSCL_CD, best32.)>500 then '기금'
 when input(a.FSCL_CD, best32.)=110 then '일반회계'
@@ -382,6 +389,27 @@ select coalesce(a.FSCL_YY, b.FSCL_YY) as FSCL_YY
 , a.v116
 , a.v14
 , a.v21
+, a.v70
+, a.v71
+, a.v72
+, a.v73
+, a.v74
+, a.v75
+, a.v76
+, a.v120
+, a.v121
+, a.v122
+, a.v123
+, a.v124
+, a.v125
+, a.v126
+, a.v130
+, a.v131
+, a.v132
+, a.v133
+, a.v134
+, a.v135
+, a.v136
 , b.w10
 , b.w11
 , b.w14
@@ -468,6 +496,27 @@ select coalesce(a.FSCL_YY, b.FSCL_YY) as FSCL_YY
 , a.v19
 , a.v20
 , a.v22
+, a.v70
+, a.v71
+, a.v72
+, a.v73
+, a.v74
+, a.v75
+, a.v76
+, a.v120
+, a.v121
+, a.v122
+, a.v123
+, a.v124
+, a.v125
+, a.v126
+, a.v130
+, a.v131
+, a.v132
+, a.v133
+, a.v134
+, a.v135
+, a.v136
 , b.v23
 , b.v24
 from
