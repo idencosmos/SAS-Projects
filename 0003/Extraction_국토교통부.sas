@@ -102,6 +102,23 @@ select b.formName, b.unitName, a.* from Alldata02 as a union join Result_data as
   set &lib..Ld_007_03;
   run;
 
+  /*(일반가구)지역별 소득계층별 주택유형(2006~2017)*/
+  %json(LD_007_04, http://stat.molit.go.kr/portal/openapi/service/rest/getList.do?key=&Str01&form_id=5727&style_num=1&start_dt=2006&end_dt=2017);
+    data &lib..Ld_007_04;
+    rename
+    다세대주택=v7
+    연립주택=v6
+    시도구분=v2
+    단독주택=v4
+    계=v10
+    '주택이외의 거처'n=v9
+    소득구분=v3
+    date=v1
+    '비거주용 건물내주택'n=v8
+    아파트=v5;
+    set &lib..Ld_007_04;
+    run;
+
 /*(일반가구)지역별 소득별 최초주택마련소요년수(2006~2017)*/
 proc import out=&lib..Ld_002_02 datafile="&dir.\테이블(직접 다운로드)\(일반가구)지역별 소득별 최초주택마련소요년수(2006~2017).csv" dbms=csv replace;
 run;
@@ -162,4 +179,23 @@ run;
   소득구분=v3
   자가보유율=v4;
   set &lib..Ld_002_05;
+  run;
+
+/*소득계층별 주택가격 대비 대출금 비율(LTV)(2006~2017)*/
+proc import out=&lib..Ld_002_06 datafile="&dir.\테이블(직접 다운로드)\소득계층별 주택가격 대비 대출금 비율(LTV).csv" dbms=csv replace;
+run;
+  data &lib..Ld_002_06;
+  rename
+  date=v1
+  시도구분=v2
+  소득구분=v3
+  LTV11=v4
+  LTV12=v5
+  LTV13=v6
+  LTV14=v7
+  LTV21=v8
+  LTV22=v9
+  LTV23=v10
+  LTV24=v11;
+  set &lib..Ld_002_06;
   run;
