@@ -20,7 +20,7 @@ proc sgplot data=&lib..D_007_03;
 run;
 
 /*주거안정성_자가보유율*/
-proc sgplot data=&lib..D_002_02;
+proc sgplot data=&lib..D_002_05;
   series x=v1 y=v4 / group=v2 markers datalabel;
   xaxis values=(2006 to 2017) display=(nolabel);
   yaxis display=(noline nolabel) grid;
@@ -28,7 +28,7 @@ proc sgplot data=&lib..D_002_02;
   title "지역별 자가보유율";
 run;
 
-proc sgplot data=&lib..D_002_02;
+proc sgplot data=&lib..D_002_05;
   series x=v1 y=v4 / group=v3 markers datalabel;
   xaxis values=(2006 to 2017) display=(nolabel);
   yaxis display=(noline nolabel) grid;
@@ -285,3 +285,18 @@ run;
 %series001(&lib..D_002_06, LTV_대출가구 대상, 전국, 저소득층);
 %series001(&lib..D_002_06, LTV_대출가구 대상, 전국, 중소득층);
 %series001(&lib..D_002_06, LTV_대출가구 대상, 전국, 고소득층);
+
+
+/*추가*/
+proc sort data=&lib..D_010_01; by v1 v4 v5 v6;run;
+proc sgplot data=&lib..D_010_01;
+  vbar v1 / response=v5 group=v2 grouporder=data datalabel groupdisplay=cluster;
+  where v2^="전국";
+  title "지역별 주택거래현황";
+run;
+
+proc sgplot data=&lib..D_010_01;
+  vbar v1 / response=v6 group=v2 grouporder=data datalabel groupdisplay=cluster;
+  where v2^="전국";
+  title "지역별 주택거래현황";
+run;

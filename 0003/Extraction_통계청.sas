@@ -50,3 +50,11 @@ filename out temp;proc http url="&url" method="get" out=out;run;libname raw json
 
 filename out temp;proc http url="&url" method="get" out=out;run;libname raw json fileref=out;data temp;set raw.alldata;if p1='TBL_NM' then group+1;proc transpose data=temp out=data_one(drop=_:);by group;id P1;var Value;run;data data_one;set data_one;run;data &lib..&data_final;set &lib..&data_final data_one;run;%end;data &lib..&data_final;set &lib..&data_final;if _n_=1 then delete;run;
 %mend;%Rd00701(data_final=Rd_007_01, date_s=2006, date_e=2016);
+
+/*건축물거래현황_년도별 유형별(2006~2017)*/
+%macro Rd01001(data_final, url, date_s, date_e);data &lib..&data_final;run;	%do date_want=&date_s %to &date_e;
+
+	%let url=http://kosis.kr/openapi/statisticsData.do?method=getList&apiKey=NjdhZTg3ZTM1OGEzZGMyOGIyZWE0ZmIxZTBiMDg0ZTg=&format=json&jsonVD=Y&userStatsId=idencosmos/408/DT_408_2006_S0027/2/1/20180605180633&prdSe=Y&startPrdDe=&date_want&endPrdDe=&date_want;
+
+filename out temp;proc http url="&url" method="get" out=out;run;libname raw json fileref=out;data temp;set raw.alldata;if p1='TBL_NM' then group+1;proc transpose data=temp out=data_one(drop=_:);by group;id P1;var Value;run;data data_one;set data_one;run;data &lib..&data_final;set &lib..&data_final data_one;run;%end;data &lib..&data_final;set &lib..&data_final;if _n_=1 then delete;run;
+%mend;%Rd01001(data_final=Rd_010_01, date_s=2006, date_e=2017);
