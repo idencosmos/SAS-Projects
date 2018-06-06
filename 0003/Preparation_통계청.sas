@@ -97,5 +97,15 @@ v1 label="date"
 , '동(호)수'n as v5 label="동(호)수"
 , 면적 as v6 label="면적"
 from &lib..Rd_010_01;
+
+create table &lib..D_010_02 as select
+v1
+, v4
+, v10
+, sum(case when v2="서울특별시" or v2="경기도" or v2="인천광역시" then v5 else 0 end) as v11 label="수도권"
+, sum(case when v2^="전국" and v2^="서울특별시" and v2^="경기도" and v2^="인천광역시" then v5 else 0 end) as v12 label="수도권 외"
+, sum(case when v2="서울특별시" or v2="경기도" or v2="인천광역시" then v6 else 0 end) as v21 label="수도권"
+, sum(case when v2^="전국" and v2^="서울특별시" and v2^="경기도" and v2^="인천광역시" then v6 else 0 end) as v22 label="수도권 외"
+from &lib..D_010_01 group by v1, v4, v10;
 quit;
 run;

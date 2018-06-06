@@ -288,15 +288,46 @@ run;
 
 
 /*추가*/
-proc sort data=&lib..D_010_01; by v1 v4 v5 v6;run;
 proc sgplot data=&lib..D_010_01;
-  vbar v1 / response=v5 group=v2 grouporder=data datalabel groupdisplay=cluster;
-  where v2^="전국";
-  title "지역별 주택거래현황";
+  vline v1 / response=v5 group=v4 grouporder=data datalabel;
+  xaxis values=(2006 to 2017) display=(nolabel);
+  yaxis display=(noline nolabel) grid;
+  where v10="동(호)수" and v2="전국";
+  title "전국 주택거래현황";
 run;
 
-proc sgplot data=&lib..D_010_01;
-  vbar v1 / response=v6 group=v2 grouporder=data datalabel groupdisplay=cluster;
-  where v2^="전국";
-  title "지역별 주택거래현황";
+proc sgplot data=&lib..D_010_02(where=(v4="아파트" or v4="다세대주택" or v4="단독주택"));
+  vline v1 / response=v11 group=v4 grouporder=data;
+  vbar v1 / response=v12 group=v4 grouporder=data datalabel groupdisplay=cluster barwidth=0.5 baselineattrs=(thickness=0);
+  xaxis values=(2006 to 2017) display=(nolabel);
+  yaxis display=(noline nolabel) grid;
+  where v10="동(호)수";
+  title "지역별 주택거래현황(line: 수도권, bar: 수도권 외)";
+run;
+
+proc sgplot data=&lib..D_010_02(where=(v4="아파트"));
+  vline v1 / response=v11 group=v4 grouporder=data;
+  vbar v1 / response=v12 group=v4 grouporder=data datalabel groupdisplay=cluster barwidth=0.5 baselineattrs=(thickness=0);
+  xaxis values=(2006 to 2017) display=(nolabel);
+  yaxis display=(noline nolabel) grid;
+  where v10="동(호)수";
+  title "지역별 주택거래현황(line: 수도권, bar: 수도권 외)";
+run;
+
+proc sgplot data=&lib..D_010_02(where=(v4="다세대주택"));
+  vline v1 / response=v11 group=v4 grouporder=data;
+  vbar v1 / response=v12 group=v4 grouporder=data datalabel groupdisplay=cluster barwidth=0.5 baselineattrs=(thickness=0);
+  xaxis values=(2006 to 2017) display=(nolabel);
+  yaxis display=(noline nolabel) grid;
+  where v10="동(호)수";
+  title "지역별 주택거래현황(line: 수도권, bar: 수도권 외)";
+run;
+
+proc sgplot data=&lib..D_010_02(where=(v4="단독주택"));
+  vline v1 / response=v11 group=v4 grouporder=data;
+  vbar v1 / response=v12 group=v4 grouporder=data datalabel groupdisplay=cluster barwidth=0.5 baselineattrs=(thickness=0);
+  xaxis values=(2006 to 2017) display=(nolabel);
+  yaxis display=(noline nolabel) grid;
+  where v10="동(호)수";
+  title "지역별 주택거래현황(line: 수도권, bar: 수도권 외)";
 run;
