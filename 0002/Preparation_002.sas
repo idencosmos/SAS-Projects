@@ -250,11 +250,11 @@ select *
 , case when v6<0 then 1 else 0 end as x6
 , w4-w1 as x7
 , w5-w2 as x8
-, case when FSCL_YY=2008 or FSCL_YY=2013 then 1
+, case when FSCL_YY=2008 or FSCL_YY=2013 or FSCL_YY=2018 then 1
 when FSCL_YY=2009 or FSCL_YY=2014 then 2
 when FSCL_YY=2010 or FSCL_YY=2015 then 3
 when FSCL_YY=2011 or FSCL_YY=2016 then 4
-when FSCL_YY=2012 or FSCL_YY=2017 then 5 else . end as x9
+when FSCL_YY=2007 or FSCL_YY=2012 or FSCL_YY=2017 then 5 else . end as x9
 from &lib..M01;
 quit;
 run;
