@@ -245,6 +245,7 @@ select *
 , case when FSCL_YY>2007 and FSCL_YY<2013 then 1 else 0 end as x1
 , case when FSCL_YY>2012 and FSCL_YY<2018 then 1 else 0 end as x2
 , case when FSCL_YY=2008 or FSCL_YY=2013 then 1 else 0 end as x3
+, case when FSCL_YY=2009 or FSCL_YY=2014 then 1 else 0 end as x31
 , case when FSCL_YY=2008 or FSCL_YY=2009 or FSCL_YY=2013 or FSCL_YY=2014 then 1 else 0 end as x4
 , case when v6>0 then 1 else 0 end as x5
 , case when v6<0 then 1 else 0 end as x6
