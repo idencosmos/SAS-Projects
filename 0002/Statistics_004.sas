@@ -9,6 +9,7 @@ proc sql;
   , sum(a.v14) as UnencumberedBalance
   , avg(a.v14) as UnencumberedBalance_avg
   , avg(a.v21) as UnencumberedBalance_per
+  , avg(a.v10) as budget_avg
   , sum(a.v10) as budget
   , sum(a.v14)/sum(a.v10) as UnencumberedBalance_budget
   from &lib..M02 as a
@@ -23,10 +24,56 @@ proc sql;
   , sum(a.v14) as UnencumberedBalance
   , avg(a.v14) as UnencumberedBalance_avg
   , avg(a.v21) as UnencumberedBalance_per
+  , avg(a.v10) as budget_avg
   , sum(a.v10) as budget
   , sum(a.v14)/sum(a.v10) as UnencumberedBalance_budget
   from &lib..M02 as a
   group by a.FSCL_YY
+  ;
+quit;
+run;
+
+proc sql;
+  create table &lib..table001_03 as select
+  a.v22
+  , sum(a.v14) as UnencumberedBalance
+  , avg(a.v14) as UnencumberedBalance_avg
+  , avg(a.v21) as UnencumberedBalance_per
+  , avg(a.v10) as budget_avg
+  , sum(a.v10) as budget
+  , sum(a.v14)/sum(a.v10) as UnencumberedBalance_budget
+  from &lib..M02 as a
+  group by a.v22
+  ;
+quit;
+run;
+
+proc sql;
+  create table &lib..table001_04 as select
+  a.FSCL_YY
+  , avg(a.v140) as avg140
+  , avg(a.v141) as avg141
+  , avg(a.v142) as avg142
+  , avg(a.v143) as avg143
+  , avg(a.v144) as avg144
+  , avg(a.v145) as avg145
+  , avg(a.v146) as avg146
+  from &lib..M02 as a
+  group by a.FSCL_YY
+  ;
+quit;
+run;
+
+proc sql;
+  create table &lib..table001_05 as select
+  avg(a.v140) as avg140
+  , avg(a.v141) as avg141
+  , avg(a.v142) as avg142
+  , avg(a.v143) as avg143
+  , avg(a.v144) as avg144
+  , avg(a.v145) as avg145
+  , avg(a.v146) as avg146
+  from &lib..M02 as a
   ;
 quit;
 run;

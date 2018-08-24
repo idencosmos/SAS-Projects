@@ -9,11 +9,49 @@ var v21;
 class x9;
 run;
 
-proc sgplot data=&lib..M02;
-  vline x9 / response=v21 y2axis stat=mean;
+proc sql;
+  create table &lib..table004 as select
+  a.x9 label="연차"
+  , avg(a.v21) as avgv21 label="예산대비 불용액 비율"
+  from &lib..M02 as a
+  group by a.x9
+  ;
+quit;
 run;
 
+proc sgplot data=&lib..Table004;
+  vline x9 / response=avgv21;
+run;
 
+proc sql;
+  create table &lib..table005 as select
+  a.FSCL_YY
+  , avg(a.v140) as avg140
+  , avg(a.v141) as avg141
+  , avg(a.v142) as avg142
+  , avg(a.v143) as avg143
+  , avg(a.v144) as avg144
+  , avg(a.v145) as avg145
+  , avg(a.v146) as avg146
+  from &lib..M02 as a
+  group by a.FSCL_YY
+  ;
+quit;
+run;
+
+proc sql;
+  create table &lib..table006 as select
+  avg(a.v140) as avg140
+  , avg(a.v141) as avg141
+  , avg(a.v142) as avg142
+  , avg(a.v143) as avg143
+  , avg(a.v144) as avg144
+  , avg(a.v145) as avg145
+  , avg(a.v146) as avg146
+  from &lib..M02 as a
+  ;
+quit;
+run;
 
 proc ttest data=&lib..M02;
   class x5;

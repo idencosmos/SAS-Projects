@@ -256,6 +256,14 @@ when FSCL_YY=2009 or FSCL_YY=2014 then 2
 when FSCL_YY=2010 or FSCL_YY=2015 then 3
 when FSCL_YY=2011 or FSCL_YY=2016 then 4
 when FSCL_YY=2007 or FSCL_YY=2012 or FSCL_YY=2017 then 5 else . end as x9
+
+, v70/v80 as v140
+, v71/v81 as v141
+, v72/v82 as v142
+, v73/v83 as v143
+, v74/v84 as v144
+, v75/v85 as v145
+, v76/v86 as v146
 from &lib..M01;
 quit;
 run;
