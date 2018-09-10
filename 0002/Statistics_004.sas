@@ -4,6 +4,39 @@
 libname &lib "&dir";
 
 proc sql;
+  create table &lib..table_ld003 as select
+  a.FSCL_YY
+  , sum(a.ANEXP_BDG_CAMT) as sum_ANEXP_BDG_CAMT
+  , sum(a.DUSEAMT) as sum_DUSEAMT
+  from  &lib..longdata_003 as a
+  group by a.FSCL_YY
+  ;
+quit;
+run;
+
+proc sql;
+  create table &lib..table_ld004 as select
+  a.CITM_CD
+  , sum(a.ANEXP_BDG_CAMT) as sum_ANEXP_BDG_CAMT
+  , sum(a.DUSEAMT) as sum_DUSEAMT
+  from  &lib..longdata_004 as a
+  group by a.CITM_CD
+  ;
+quit;
+run;
+
+proc sql;
+  create table &lib..table_ld004_fscl as select
+  a.FSCL_CD
+  , sum(a.ANEXP_BDG_CAMT) as sum_ANEXP_BDG_CAMT
+  , sum(a.DUSEAMT) as sum_DUSEAMT
+  from  &lib..longdata_004 as a
+  group by a.FSCL_CD
+  ;
+quit;
+run;
+
+proc sql;
   create table &lib..table001 as select
   a.x9
   , sum(a.v14) as UnencumberedBalance

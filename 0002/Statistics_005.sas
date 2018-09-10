@@ -20,7 +20,9 @@ quit;
 run;
 
 proc sgplot data=&lib..Table004;
-  vline x9 / response=avgv21;
+  vbar x9 / response=avgv21 datalabel datalabelattrs=(size=12pt) barwidth=0.5;
+  xaxis valueattrs=(size=12pt) labelattrs=(size=12pt);
+  yaxis valueattrs=(size=12pt) labelattrs=(size=12pt);
 run;
 
 proc sql;
