@@ -3,17 +3,19 @@
 
 libname &lib "&dir";
 
+/*연도별 예산과 불용액*/
 proc sql;
-  create table &lib..table_ld003 as select
+  create table &lib..table_ld004_FSCL as select
   a.FSCL_YY
   , sum(a.ANEXP_BDG_CAMT) as sum_ANEXP_BDG_CAMT
   , sum(a.DUSEAMT) as sum_DUSEAMT
-  from  &lib..longdata_003 as a
+  from  &lib..longdata_004 as a
   group by a.FSCL_YY
   ;
 quit;
 run;
 
+/*지출목별 예산과 불용액*/
 proc sql;
   create table &lib..table_ld004 as select
   a.CITM_CD
@@ -25,6 +27,7 @@ proc sql;
 quit;
 run;
 
+/*회계별 예산과 불용액*/
 proc sql;
   create table &lib..table_ld004_fscl as select
   a.FSCL_CD

@@ -25,6 +25,7 @@ proc sgplot data=&lib..Table004;
   yaxis valueattrs=(size=12pt) labelattrs=(size=12pt);
 run;
 
+/*불용액/세출예산현액*/
 proc sql;
   create table &lib..table005 as select
   a.FSCL_YY
@@ -41,6 +42,7 @@ proc sql;
 quit;
 run;
 
+/*불용액/세출예산현액*/
 proc sql;
   create table &lib..table006 as select
   avg(a.v140) as avg140

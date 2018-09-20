@@ -1,3 +1,55 @@
+---
+
+    NOTE: Copyright (c) 2016 by SAS Institute Inc., Cary, NC, USA.
+    NOTE: SAS (r) Proprietary Software 9.4 (TS1M5 MBCS3170)
+    NOTE: 이 세션은 X64_10HOME 플랫폼에서 실행되고 있습니다.
+
+    NOTE: 업데이트 된 분석 제품:
+
+      SAS/STAT 14.3
+      SAS/ETS 14.3
+      SAS/OR 14.3
+      SAS/IML 14.3
+      SAS/QC 14.3
+
+    NOTE: 추가 호스트 정보:
+
+      X64_10HOME WIN 10.0.16299 Workstation
+
+API로 불러오는 자료의 인코딩에 문제가 있어서 SAS 9.4 (유니코드 지원)으로 실행합니다.
+
+---
+
+#코드
+1. Final_extraction_longdata_002.sas
+2. Final_extraction_longdata_004.sas
+3. Final_extraction_longdata_GDP.sas
+4. Final_Preparation.sas
+5. Final_Statistics.sas
+
+#변수
+- v21: 예산대비 불용액 비율
+- v7: 국회심의과정 중 예산변화율
+- v19: 전년도대비 예산증가율
+- v15: 예산대비 불용액 비율(전년도)
+- v24: 부처예산대비 단위사업 규모
+- v100: 인건비 예산비율
+- v101: 물건비 예산비율
+- v102: 이전지출 예산비율
+- v103: 자산취득 예산비율
+- v104: 상환지출 예산비율
+- v105: 전출금등 예산비율
+- v106: 예비비및기타 예산비율
+- x16: GDP 성장률
+- x9: 정권 연차
+- x3: 정권 1년차(더미)
+- x31: 정권 2년차(더미)
+- x4: 정권 3년차(더미)
+- v22: 회계분류
+- OFFC_NM: 부처분류
+
+---
+
 longdata_001: 월별 지출집행상황 / 2015-2018 / 예산은 전년도이월액, 추경예산 등을 포함한 현행예산입니다.
 longdata_002: 세출/지출 예산편성현황(총액) / 2007-2018
 longdata_003: 소관별 세입/세출 결산 현황 / 2007-2018
@@ -76,7 +128,7 @@ var001
 
 var002
   v6: 금년도국회확정안-금년도정부안
-  v7: v6/금년도국회확정안
+  v7: v6/금년도정부안
 
 var003
   v70-v76: 각각 불용액

@@ -4,13 +4,15 @@
 libname &lib "&dir";
 
 /*변수 기초통계량*/
-proc means data=&lib..M02 n mean median std min max;
+proc means data=&lib..M02 n mean std;
   var v21 v7 v19 v15 v24 v100 v101 v102 v103 v104 v105 v106 x16;
+  where v19^=. and v21^=. and v7^=. and v15^=. and v24^=. and v100^=.;
 run;
 
 /*상관관계*/
 proc corr data=&lib..M02;
   var v21 v7 v19 v15 v24 v100 v101 v102 v103 v104 v105 v106 x16;
+  where v19^=. and v21^=. and v7^=. and v15^=. and v24^=. and v100^=.;
 run;
 
 /*1. 불용액이 정권초기에 더 많은가?*/

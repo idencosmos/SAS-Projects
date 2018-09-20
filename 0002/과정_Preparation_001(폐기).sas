@@ -539,61 +539,6 @@ quit;
 run;
 
 proc sql;
-create table &lib..var006 as
-select a.*, b.w30, b.w31, b.w32, b.w33, b.w34, b.w35, b.w36, b.w37, a.ANEXP_BDG_CAMT-b.w33 as v35, (a.ANEXP_BDG_CAMT-b.w33)/a.ANEXP_BDG_CAMT as v40, a.DUSEAMT/a.ANEXP_BDG_CAMT as v41, b.w37/b.w33 as w41 from
-(
-select distinct FSCL_YY
-, OFFC_NM
-, REVN_BDG_CAMT
-, RC_AMT
-, REVN_RC_AMT
-, ANEXP_BDG_CAMT
-, EP_AMT
-, ANEXP_EP_AMT
-, ELUC_BFWAMT
-, DUSEAMT
-from &lib..longdata_003
-group by FSCL_YY
-, OFFC_NM
-, REVN_BDG_CAMT
-, RC_AMT
-, REVN_RC_AMT
-, ANEXP_BDG_CAMT
-, EP_AMT
-, ANEXP_EP_AMT
-, ELUC_BFWAMT
-, DUSEAMT
-) as a
-left join
-(
-select distinct FSCL_YY+1 as FSCL_YY
-, OFFC_NM
-, REVN_BDG_CAMT as w30
-, RC_AMT as w31
-, REVN_RC_AMT as w32
-, ANEXP_BDG_CAMT as w33
-, EP_AMT as w34
-, ANEXP_EP_AMT as w35
-, ELUC_BFWAMT as w36
-, DUSEAMT as w37
-from &lib..longdata_003
-group by FSCL_YY
-, OFFC_NM
-, REVN_BDG_CAMT
-, RC_AMT
-, REVN_RC_AMT
-, ANEXP_BDG_CAMT
-, EP_AMT
-, ANEXP_EP_AMT
-, ELUC_BFWAMT
-, DUSEAMT
-) as b
-on a.FSCL_YY=b.FSCL_YY
-and a.OFFC_NM=b.OFFC_NM;
-quit;
-run;
-
-proc sql;
 create table &lib..var007 as
 select *, DUSEAMT/ANEXP_BDG_CAMT as DUSEAMT_Per, case
 when CITM_CD='110' then '인건비'
