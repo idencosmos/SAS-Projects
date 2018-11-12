@@ -1,7 +1,22 @@
-%let dir=D:\OneDrive\Github\SAS-Projects\0002\sas7bdat\;
-%let lib=A0002;
+%let dir=D:\OneDrive\Github\SAS-Projects\0002\sas7bdat(modify)\;
+%let dir_o=D:\OneDrive\Github\SAS-Projects\0002\sas7bdat\;
+%let lib=A0002M;
+%let lib_o=A0002;
 
 libname &lib "&dir";
+libname &lib_o "&dir_o";
+
+data &lib..Longdata_002_M;
+set &lib_o..Longdata_002;
+if find(ACCT_NM, '융자') or find(ACCT_NM, '보증') then M01=1; else M01=0;
+if find(ACCT_NM, '투자') then M02=1; else M02=0;
+run;
+
+data &lib..Longdata_004_M;
+set &lib_o..Longdata_004;
+if find(ACCT_NM, '융자') or find(ACCT_NM, '보증') then M01=1; else M01=0;
+if find(ACCT_NM, '투자') then M02=1; else M02=0;
+run;
 
 proc sql;
 create table &lib..var003 as
@@ -20,6 +35,8 @@ select distinct FSCL_YY
 , PGM_NM
 , ACTV_CD
 , ACTV_NM
+, M01
+, M02
 , sum(DUSEAMT) as v14
 , sum(case when CITM_CD='110' then DUSEAMT else 0 end) as v70
 , sum(case when CITM_CD='110' then ANEXP_BDG_CAMT else 0 end) as v80
@@ -44,7 +61,7 @@ select distinct FSCL_YY
 , sum(case when CITM_CD='710' then EP_AMT else 0 end) as v96
 , sum(ANEXP_BDG_CAMT) as v10
 , sum(EP_AMT) as v11
-from &lib..longdata_004
+from &lib..longdata_004_M
 group by FSCL_YY
 , OFFC_CD
 , OFFC_NM
@@ -58,6 +75,8 @@ group by FSCL_YY
 , PGM_NM
 , ACTV_CD
 , ACTV_NM
+, M01
+, M02
 )
 ;
 quit;
@@ -84,10 +103,12 @@ select distinct FSCL_YY
 , PGM_NM
 , ACTV_CD
 , ACTV_NM
+, M01
+, M02
 , sum(DUSEAMT) as v14
 , sum(ANEXP_BDG_CAMT) as v10
 , sum(EP_AMT) as v11
-from &lib..longdata_004
+from &lib..longdata_004_M
 group by FSCL_YY
 , OFFC_CD
 , OFFC_NM
@@ -101,6 +122,8 @@ group by FSCL_YY
 , PGM_NM
 , ACTV_CD
 , ACTV_NM
+, M01
+, M02
 ) as a
 left join
 (
@@ -117,10 +140,12 @@ select distinct FSCL_YY+1 as FSCL_YY
 , PGM_NM
 , ACTV_CD
 , ACTV_NM
+, M01
+, M02
 , sum(DUSEAMT) as w14
 , sum(ANEXP_BDG_CAMT) as w10
 , sum(EP_AMT) as w11
-from &lib..longdata_004
+from &lib..longdata_004_M
 group by FSCL_YY
 , OFFC_CD
 , OFFC_NM
@@ -134,6 +159,8 @@ group by FSCL_YY
 , PGM_NM
 , ACTV_CD
 , ACTV_NM
+, M01
+, M02
 ) as b
 on a.FSCL_YY=b.FSCL_YY
 and a.OFFC_CD=b.OFFC_CD
@@ -147,7 +174,10 @@ and a.SECT_NM=b.SECT_NM
 and a.PGM_CD=b.PGM_CD
 and a.PGM_NM=b.PGM_NM
 and a.ACTV_CD=b.ACTV_CD
-and a.ACTV_NM=b.ACTV_NM;
+and a.ACTV_NM=b.ACTV_NM
+and a.M01=b.M01
+and a.M02=b.M02
+;
 quit;
 run;
 
@@ -168,8 +198,10 @@ select distinct FSCL_YY
 , PGM_NM
 , ACTV_CD
 , ACTV_NM
+, M01
+, M02
 , SUM(ANEXP_BDG_CAMT) as v10
-from &lib..longdata_004
+from &lib..longdata_004_M
 group by FSCL_YY
 , OFFC_CD
 , OFFC_NM
@@ -183,6 +215,8 @@ group by FSCL_YY
 , PGM_NM
 , ACTV_CD
 , ACTV_NM
+, M01
+, M02
 ) as a
 left join
 (
@@ -190,7 +224,7 @@ select distinct FSCL_YY
 , OFFC_CD
 , OFFC_NM
 , SUM(ANEXP_BDG_CAMT) as v23
-from &lib..longdata_004
+from &lib..longdata_004_M
 group by FSCL_YY
 , OFFC_CD
 , OFFC_NM
@@ -217,6 +251,8 @@ select coalesce(a.FSCL_YY, b.FSCL_YY) as FSCL_YY
 , coalesce(a.PGM_NM, b.PGM_NM) as PGM_NM
 , coalesce(a.ACTV_CD, b.ACTV_CD) as ACTV_CD
 , coalesce(a.ACTV_NM, b.ACTV_NM) as ACTV_NM
+, coalesce(a.M01, b.M01) as M01
+, coalesce(a.M02, b.M02) as M02
 , a.v80
 , a.v90
 , a.v81
@@ -295,7 +331,10 @@ and a.SECT_NM=b.SECT_NM
 and a.PGM_CD=b.PGM_CD
 and a.PGM_NM=b.PGM_NM
 and a.ACTV_CD=b.ACTV_CD
-and a.ACTV_NM=b.ACTV_NM;
+and a.ACTV_NM=b.ACTV_NM
+and a.M01=b.M01
+and a.M02=b.M02
+;
 quit;
 run;
 
@@ -314,6 +353,8 @@ select coalesce(a.FSCL_YY, b.FSCL_YY) as FSCL_YY
 , coalesce(a.PGM_NM, b.PGM_NM) as PGM_NM
 , coalesce(a.ACTV_CD, b.ACTV_CD) as ACTV_CD
 , coalesce(a.ACTV_NM, b.ACTV_NM) as ACTV_NM
+, coalesce(a.M01, b.M01) as M01
+, coalesce(a.M02, b.M02) as M02
 , a.v80
 , a.v90
 , a.v81
@@ -394,7 +435,10 @@ and a.SECT_NM=b.SECT_NM
 and a.PGM_CD=b.PGM_CD
 and a.PGM_NM=b.PGM_NM
 and a.ACTV_CD=b.ACTV_CD
-and a.ACTV_NM=b.ACTV_NM;
+and a.ACTV_NM=b.ACTV_NM
+and a.M01=b.M01
+and a.M02=b.M02
+;
 quit;
 run;
 
@@ -409,9 +453,11 @@ select distinct FSCL_YY
 , SECT_NM
 , PGM_NM
 , ACTV_NM
+, M01
+, M02
 , sum(Y_YY_DFN_MEDI_KCUR_AMT) as Y_YY_DFN_MEDI_KCUR_AMT
 , sum(Y_YY_DFN_MEDI_KCUR_AMT-Y_YY_MEDI_KCUR_AMT) as v6
-from &lib..Longdata_002
+from &lib..Longdata_002_M
 group by FSCL_YY
 , OFFC_NM
 , FSCL_NM
@@ -419,6 +465,8 @@ group by FSCL_YY
 , SECT_NM
 , PGM_NM
 , ACTV_NM
+, M01
+, M02
 )
 ;
 quit;
@@ -464,6 +512,8 @@ select coalesce(a.FSCL_YY, b.FSCL_YY) as FSCL_YY
 , coalesce(a.PGM_NM, b.PGM_NM) as PGM_NM
 , a.ACTV_CD
 , coalesce(a.ACTV_NM, b.ACTV_NM) as ACTV_NM
+, coalesce(a.M01, b.M01) as M01
+, coalesce(a.M02, b.M02) as M02
 , b.v6
 , b.v7
 , a.x1
@@ -555,14 +605,17 @@ and a.FSCL_NM=b.FSCL_NM
 and a.FLD_NM=b.FLD_NM
 and a.SECT_NM=b.SECT_NM
 and a.PGM_NM=b.PGM_NM
-and a.ACTV_NM=b.ACTV_NM;
+and a.ACTV_NM=b.ACTV_NM
+and a.M01=b.M01
+and a.M02=b.M02
+;
 quit;
 run;
 
 proc sql;
   create table &lib..M02 as
   select a.*, b._NAME5 as x16
-  from &lib..M02_pre as a left join &lib..longdata_GDP as b
+  from &lib..M02_pre as a left join &lib_o..longdata_GDP as b
   on a.FSCL_YY=b._NAME5__NAME6;
 quit;
 run;

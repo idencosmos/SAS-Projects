@@ -26,6 +26,9 @@ API로 불러오는 자료의 인코딩에 문제가 있어서 SAS 9.4 (유니�
 3. Final_extraction_longdata_GDP.sas
 4. Final_Preparation.sas
 5. Final_Statistics.sas
+40. Final_Preparation(modify).sas
+50. Final_Statistics(modify).sas
+* modify는 논문심사 후 계정명을 추가하여, 투자 및 융자계정을 회귀분석에 추가한 것
 
 #변수
 - v21: 예산대비 불용액 비율
@@ -44,7 +47,7 @@ API로 불러오는 자료의 인코딩에 문제가 있어서 SAS 9.4 (유니�
 - x9: 정권 연차
 - x3: 정권 1년차(더미)
 - x31: 정권 2년차(더미)
-- x4: 정권 3년차(더미)
+- x4: 정권 1, 2년차(더미)
 - v22: 회계분류
 - OFFC_NM: 부처분류
 
