@@ -60,6 +60,8 @@ libname &lib "&dir";
 %json(String05=http://lofin.mois.go.kr/HUB/CDDFA, table=table001, date_s=2010, date_e=2017);
 %json(String05=http://lofin.mois.go.kr/HUB/GGNSE, table=table002, date_s=2010, date_e=2017);
 %json(String05=http://lofin.mois.go.kr/HUB/FIACRV, table=table003, date_s=2010, date_e=2017);
+%json(String05=http://lofin.mois.go.kr/HUB/HEDFC, table=table008, date_s=2010, date_e=2017);
+%json(String05=http://lofin.mois.go.kr/HUB/JFIED, table=table009, date_s=2010, date_e=2017);
 
 /*아래는 변수 변환과 변수명 입력*/
 
@@ -114,5 +116,33 @@ select input(accnut_year, best32.) as accnut_year label="회계연도"
 , input(amt7, best32.) as amt7 label="공기업특별회계순계"
 , input(amt8, best32.) as amt8 label="기타특별회계순계"
 from table003;
+quit;
+run;
+
+proc sql;
+create table &lib..table008 as
+select input(accnut_year, best32.) as accnut_year label="회계연도"
+, input(wdr_sfrnd_code, best32.) as wdr_sfrnd_code label="지역코드"
+, wdr_sfrnd_nm as wdr_sfrnd_nm label="지역명"
+, input(sfrnd_code, best32.) as sfrnd_code label="자치단체코드"
+, sfrnd_nm_korean as sfrnd_nm_korean label="자치단체명"
+, input(amt1, best32.) as amt1 label="채무잔액"
+, input(amt2, best32.) as amt2 label="최종예산액"
+, input(rate1, best32.) as rate1 label="예산대비채무비율"
+from table008;
+quit;
+run;
+
+proc sql;
+create table &lib..table009 as
+select input(accnut_year, best32.) as accnut_year label="회계연도"
+, input(wdr_sfrnd_code, best32.) as wdr_sfrnd_code label="지역코드"
+, wdr_sfrnd_nm as wdr_sfrnd_nm label="지역명"
+, input(sfrnd_code, best32.) as sfrnd_code label="자치단체코드"
+, sfrnd_nm_korean as sfrnd_nm_korean label="자치단체명"
+, input(amt1, best32.) as amt1 label="자체수입"
+, input(amt2, best32.) as amt2 label="자치단체 예산규모"
+, input(rate1, best32.) as rate1 label="재정자립도"
+from table009;
 quit;
 run;
