@@ -70,22 +70,23 @@ quit;
 run;
 
 data accnut_year;
-  input accnut_year year;
+  length com1 $100 com2 $100;
+  input accnut_year year com1$ com2$;
   cards;
-  2010 2010
-  2011 2010
-  2012 2010
-  2013 2010
-  2014 2014
-  2015 2014
-  2016 2014
-  2017 2014
+  2010 2010 한나라당 한나라당
+  2011 2010 한나라당 한나라당
+  2012 2010 한나라당 한나라당
+  2013 2010 한나라당 한나라당
+  2014 2014 새누리당 새누리당
+  2015 2014 새누리당 새누리당
+  2016 2014 새누리당 새정치민주연합
+  2017 2014 새정치민주연합 새정치민주연합
   ;
 run;
 
 proc sql;
   create table &lib..var006 as
-  select a.accnut_year, b.*
+  select a.accnut_year, a.com1, a.com2, b.*, case when b.var25=a.com1 then 1 else 0 end as comp1 label="여당정당일치여부", case when b.var25=a.com2 then 1 else 0 end as comp2 label="다수당정당일치여부"
   from accnut_year as a right join
   (
     select a.accnut_year as year

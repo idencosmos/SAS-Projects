@@ -123,7 +123,7 @@ proc sql;
 create table &lib..table008 as
 select input(accnut_year, best32.) as accnut_year label="회계연도"
 , input(wdr_sfrnd_code, best32.) as wdr_sfrnd_code label="지역코드"
-, wdr_sfrnd_nm as wdr_sfrnd_nm label="지역명"
+, wdr_sfrnd_code_nm as wdr_sfrnd_code_nm label="지역명"
 , input(sfrnd_code, best32.) as sfrnd_code label="자치단체코드"
 , sfrnd_nm_korean as sfrnd_nm_korean label="자치단체명"
 , input(amt1, best32.) as amt1 label="채무잔액"
@@ -137,7 +137,7 @@ proc sql;
 create table &lib..table009 as
 select input(accnut_year, best32.) as accnut_year label="회계연도"
 , input(wdr_sfrnd_code, best32.) as wdr_sfrnd_code label="지역코드"
-, wdr_sfrnd_nm as wdr_sfrnd_nm label="지역명"
+, wdr_sfrnd_code_nm as wdr_sfrnd_code_nm label="지역명"
 , input(sfrnd_code, best32.) as sfrnd_code label="자치단체코드"
 , sfrnd_nm_korean as sfrnd_nm_korean label="자치단체명"
 , input(amt1, best32.) as amt1 label="자체수입"

@@ -1,11 +1,10 @@
 %let dir=D:\OneDrive\Github\SAS-Projects\0008\kosis\;
 %let lib_dir=D:\OneDrive\Github\SAS-Projects\0008\sas7bdat\;
 %let lib=A0008;
-%let String01=ESJRV1000133420181212043443CMJUY;/*apiKey*/
 
 libname &lib "&lib_dir";
 
-%let var_want=PRD_DE/*연도*/ DT/*수*/ C1 C1_NM;/*원하는 변수만 남기기, 전부 남기고 싶으면 공란*/
+%let var_want=PRD_DE/*연도*/ DT/*수*/ C1 C1_NM;
 
 %macro json(data_final, date_s, date_e);
 data &lib..&data_final;run;
@@ -15,7 +14,7 @@ data &lib..&data_final;run;
 	filename out temp;proc http url="&url" method="get" out=out;run;
 	libname raw json fileref=out;
 
-	data "&dir.temp";set raw.alldata;if p1='TBL_NM' then group+1;/*첫번째 행의 변수와 같으면 +1, 자동으로 p1의 첫번째 값을 'TBL_NM'대신 들어가도록 하는 방법을 못 찾겠습니다.*/run;
+	data "&dir.temp";set raw.alldata;if p1='TBL_NM' then group+1;run;
 
 	proc transpose data="&dir.temp" out="&dir.data_one"(drop=_:);by group;id P1;var Value;run;
 
@@ -68,4 +67,13 @@ data &lib..var007;
   set &lib..var007;
   sfrnd_nm_korean=cats(wdr,C1_NM);
   keep sfrnd_nm_korean prd_de dt;
+run;
+
+proc sql;
+create table &lib..var007 as
+select input(PRD_DE, best32.) as PRD_DE
+, input(DT, best32.) as DT
+, sfrnd_nm_korean
+from &lib..var007;
+quit;
 run;

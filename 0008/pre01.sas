@@ -5,9 +5,27 @@
 libname &lib "&dir";
 
 proc sql;
-  create table &lib..var002 as
+  create table &lib..var001 as
   select * from &lib..table003
   where level_no=1;
+quit;
+run;
+
+proc sql;
+  create table &lib..var002 as
+  select a.*, b.rate1, b.rate2
+  from &lib..var001 as a left join
+  (
+    select a.*, b.rate1 as rate2
+    from &lib..table008 as a left join &lib..table009 as b
+    on a.accnut_year=b.accnut_year
+    and a.wdr_sfrnd_code=b.wdr_sfrnd_code
+    and a.wdr_sfrnd_code_nm=b.wdr_sfrnd_code_nm
+    and a.sfrnd_code=b.sfrnd_code
+    and a.sfrnd_nm_korean=b.sfrnd_nm_korean
+  ) as b
+  on a.accnut_year=b.accnut_year
+  and a.sfrnd_code=b.sfrnd_code;
 quit;
 run;
 
@@ -98,11 +116,13 @@ proc sql;
       , amt2
       , amt3
       , amt4
+      , rate1
+      , rate2
       from &lib..var003
     )
     group by accnut_year
     , wdr_sfrnd_code
-    , wdr_sfrnd_code_nm
+    , wdr_sfrnd_nm
   )
   group by accnut_year;
 quit;
@@ -157,7 +177,7 @@ proc sql;
   create table &lib..var005_wdr as
   select distinct accnut_year
   , wdr_sfrnd_code
-  , wdr_sfrnd_code_nm
+  , wdr_sfrnd_nm
   , remain_wdr
   , rr_wdr
   , carry_wdr

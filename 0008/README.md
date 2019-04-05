@@ -10,13 +10,15 @@ table009: 재정자립도(최종); http://lofin.mois.go.kr/portal/service/openIn
 
 ---
 
-var001
-var002: table003
+var001: table003
+var002: var002 left join table008, table009
 var003: var002 left join var004
 var004: table004
-var005: var003 left join table001
+var005: var003
 var006: table006 left join table005
 var007: table007
+var008: var005 left join var006
+
 
 ---
 
@@ -30,20 +32,20 @@ var007: table007
 
 ---
 
-종속변수: 지방자치단체자의 예산집행률(0)
+종속변수: 지방자치단체자의 예산집행률(ratio_remainder)
 
-독립변수: 정부 여당과의 정당 일치 여부
-  정부 다수당과 정당 일치 여부
-  광역지방자치단체장과 정당 일치 여부(0)
-  기초지방자치단체장의 지방선거 득표율(0)
-  기초지방자치단체장의 재선 여부(0)
+독립변수: 정부 여당과의 정당 일치 여부(comp1)
+  정부 다수당과 정당 일치 여부(comp2)
+  광역지방자치단체장과 정당 일치 여부(var102)
+  기초지방자치단체장의 지방선거 득표율(var37)
+  기초지방자치단체장의 재선 여부(var101)
 
-통제변수: 광역지방자치단체(더미)(0)
-  정당(더미)(0)
-  연도(더미)(0)
-  고령 인구비율(0)
-  지방채비율(0)
-  재정자립도(0)
+통제변수: 광역지방자치단체(더미)(wdr_sfrnd_code_nm)
+  정당(더미)(var25)
+  연도(더미)(accnut_year)
+  고령 인구비율(dt)
+  지방채비율(rate1)
+  재정자립도(rate2)
 
 ---
 
@@ -54,3 +56,9 @@ c(carry): 전년도이월사업비
 d(remainder): 순세계잉여금(법정잉여금 포함)
 ratio_remainder: 순세계잉여금을 제외한 예산집행률
 ratio_remain: 세계잉여금을 제외한 예산집행률
+rate1: 예산대비채무비율
+rate2: 재정자립도
+comp1: 국회여당 정당일치여부
+comp2: 국회다수당 정당일치여부
+var102: 광역지방자치단체장과 정당일치여부
+dt: 고령 인구비율
