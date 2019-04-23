@@ -13,7 +13,7 @@ run;
 
 proc sql;
   create table &lib..var002 as
-  select a.*, b.rate1, b.rate2
+  select a.*, b.rate1/100 as rate1, b.rate2/100 as rate2
   from &lib..var001 as a left join
   (
     select a.*, b.rate1 as rate2

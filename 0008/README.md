@@ -32,7 +32,7 @@ var008: var005 left join var006
 
 ---
 
-종속변수: 지방자치단체자의 예산집행률(ratio_remainder)
+종속변수: 지방자치단체장의 예산집행률(ratio_remainder)
 
 독립변수: 정부 여당과의 정당 일치 여부(comp1)
   정부 다수당과 정당 일치 여부(comp2)
