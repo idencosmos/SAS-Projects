@@ -7,10 +7,11 @@ table006: 시군구의장선거; 범위: 1차-7차
 table007: 지역별 고령인구비율; 범위: 2010-2018
 table008: 예산대비채무비율; http://lofin.mois.go.kr/portal/service/openInfPage.do?infId=AQ1PTH5E3I4CK89VE729438382&srvCd=#; 범위: 2010-2017
 table009: 재정자립도(최종); http://lofin.mois.go.kr/portal/service/openInfPage.do?infId=G8HHJMAEPI2Z3DG5332Y457985&srvCd=; 범위: 2010-2017
+table010: [재원별 단체별 세입예산](http://lofin.mois.go.kr/portal/service/openInfPage.do?infId=9A1MVRX3D2YAPYTM6KZQ984473&srvCd=#); 범위: 2000-2019
 
 ---
 
-var001: table003
+var001: table003 left join table010
 var002: var002 left join table008, table009
 var003: var002 left join var004
 var004: table004
@@ -58,6 +59,7 @@ ratio_remainder: 순세계잉여금을 제외한 예산집행률
 ratio_remain: 세계잉여금을 제외한 예산집행률
 rate1: 예산대비채무비율
 rate2: 재정자립도
+rate3: 예산대비실제세입
 comp1: 국회여당 정당일치여부
 comp2: 국회다수당 정당일치여부
 var102: 광역지방자치단체장과 정당일치여부

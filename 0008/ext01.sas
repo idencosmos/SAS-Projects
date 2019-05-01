@@ -1,4 +1,4 @@
-%let dir=D:\Kwonhee\OneDrive\Github\SAS-Projects\0008\sas7bdat\;
+%let dir=D:\OneDrive\Github\SAS-Projects\0008\sas7bdat\;
 %let lib=A0008;
 %let String01=ESJRV1000133420181212043443CMJUY;/*apiKey*/
 
@@ -62,6 +62,7 @@ libname &lib "&dir";
 %json(String05=http://lofin.mois.go.kr/HUB/FIACRV, table=table003, date_s=2010, date_e=2017);
 %json(String05=http://lofin.mois.go.kr/HUB/HEDFC, table=table008, date_s=2010, date_e=2017);
 %json(String05=http://lofin.mois.go.kr/HUB/JFIED, table=table009, date_s=2010, date_e=2017);
+%json(String05=http://lofin.mois.go.kr/HUB/FIRVBG, table=table010, date_s=2010, date_e=2017);
 
 /*아래는 변수 변환과 변수명 입력*/
 
@@ -144,5 +145,20 @@ select input(accnut_year, best32.) as accnut_year label="회계연도"
 , input(amt2, best32.) as amt2 label="자치단체 예산규모"
 , input(rate1, best32.) as rate1 label="재정자립도"
 from table009;
+quit;
+run;
+
+proc sql;
+create table &lib..table010 as
+select input(accnut_year, best32.) as accnut_year label="회계연도"
+, input(wdr_sfrnd_code, best32.) as wdr_sfrnd_code label="지역코드"
+, wdr_sfrnd_nm as wdr_sfrnd_nm label="지역명"
+, input(sfrnd_code, best32.) as sfrnd_code label="자치단체코드"
+, sfrnd_nm_korean as sfrnd_nm_korean label="자치단체명"
+, input(armok_code, best32.) as armok_code label="세목코드"
+, armok_code_nm_korean as armok_code_nm_korean label="세목명"
+, input(prvyydo_lastbudget_puresmam, best32.) as prvyydo_lastbudget_puresmam label="예산순계"
+, input(prvyydo_last_budget_smam, best32.) as prvyydo_last_budget_smam label="예산총계"
+from table010;
 quit;
 run;
