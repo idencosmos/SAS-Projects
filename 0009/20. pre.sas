@@ -159,8 +159,8 @@ proc sql;
   , SECT_NM
   , PGM_NM
   , ACTV_NM
-  , sum(Y_YY_MEDI_KCUR_AMT) as Y_YY_MEDI_KCUR_AMT label="금년도조정원화금액"
-  , sum(Y_YY_DFN_MEDI_KCUR_AMT) as Y_YY_DFN_MEDI_KCUR_AMT label="금년도확정조정원화금액"
+  , sum(Y_YY_MEDI_KCUR_AMT)*1000 as Y_YY_MEDI_KCUR_AMT label="금년도조정원화금액"
+  , sum(Y_YY_DFN_MEDI_KCUR_AMT)*1000 as Y_YY_DFN_MEDI_KCUR_AMT label="금년도확정조정원화금액"
   from &lib..longdata_003
   group by FSCL_YY
   , OFFC_NM
