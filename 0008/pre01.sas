@@ -30,16 +30,28 @@ run;
 
 proc sql;
   create table &lib..var002 as
-  select a.*, b.rate1/100 as rate1, b.rate2/100 as rate2
+  select a.*, b.rate1/100 as rate1, b.rate2/100 as rate2, b.rate4/100 as rate4, b.rate5/100 as rate5
   from &lib..var001 as a left join
   (
-    select a.*, b.rate1 as rate2
+    select a.*, b.rate1 as rate2, c.rate1 as rate4, d.rate1 as rate5
     from &lib..table008 as a left join &lib..table009 as b
     on a.accnut_year=b.accnut_year
     and a.wdr_sfrnd_code=b.wdr_sfrnd_code
     and a.wdr_sfrnd_code_nm=b.wdr_sfrnd_code_nm
     and a.sfrnd_code=b.sfrnd_code
     and a.sfrnd_nm_korean=b.sfrnd_nm_korean
+    left join &lib..table011 as c
+    on a.accnut_year=c.accnut_year
+    and a.wdr_sfrnd_code=c.wdr_sfrnd_code
+    and a.wdr_sfrnd_code_nm=c.wdr_sfrnd_code_nm
+    and a.sfrnd_code=c.sfrnd_code
+    and a.sfrnd_nm_korean=c.sfrnd_nm_korean
+    left join &lib..table012 as d
+    on a.accnut_year=d.accnut_year
+    and a.wdr_sfrnd_code=d.wdr_sfrnd_code
+    and a.wdr_sfrnd_code_nm=d.wdr_sfrnd_code_nm
+    and a.sfrnd_code=d.sfrnd_code
+    and a.sfrnd_nm_korean=d.sfrnd_nm_korean
   ) as b
   on a.accnut_year=b.accnut_year
   and a.sfrnd_code=b.sfrnd_code;
@@ -136,6 +148,8 @@ proc sql;
       , rate1
       , rate2
       , rate3
+      , rate4
+      , rate5
       from &lib..var003
     )
     group by accnut_year

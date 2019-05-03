@@ -6,8 +6,10 @@ table005: 시도지사선거; 범위: 1차-7차
 table006: 시군구의장선거; 범위: 1차-7차
 table007: 지역별 고령인구비율; 범위: 2010-2018
 table008: 예산대비채무비율; http://lofin.mois.go.kr/portal/service/openInfPage.do?infId=AQ1PTH5E3I4CK89VE729438382&srvCd=#; 범위: 2010-2017
-table009: 재정자립도(최종); http://lofin.mois.go.kr/portal/service/openInfPage.do?infId=G8HHJMAEPI2Z3DG5332Y457985&srvCd=; 범위: 2010-2017
+table009: [재정자립도(최종)](http://lofin.mois.go.kr/portal/service/openInfPage.do?infId=G8HHJMAEPI2Z3DG5332Y457985&srvCd=); 범위: 2010-2017
 table010: [재원별 단체별 세입예산](http://lofin.mois.go.kr/portal/service/openInfPage.do?infId=9A1MVRX3D2YAPYTM6KZQ984473&srvCd=#); 범위: 2000-2019
+table011: [재정자주도(최종)](http://lofin.mois.go.kr/portal/service/openInfPage.do?infId=AS69NZGKR2Z865DCAO1Q1161886&srvCd=#); 범위: 2000-2017
+table012: [통합재정수지비율(최종)](http://lofin.mois.go.kr/portal/service/openInfPage.do?infId=1K7I483TWDHF1M2IR6PL632443&srvCd=#); 범위: 2009-2017
 
 ---
 
@@ -37,6 +39,8 @@ var008: var005 left join var006
 
 독립변수: 정부 여당과의 정당 일치 여부(comp1)
   정부 다수당과 정당 일치 여부(comp2)
+  정부 여당과의 정당 일치 여부/0.5(comp3)
+  정부 다수당과 정당 일치 여부/0.5(comp4)
   광역지방자치단체장과 정당 일치 여부(var102)
   기초지방자치단체장의 지방선거 득표율(var37)
   기초지방자치단체장의 재선 여부(var101)
@@ -60,7 +64,10 @@ ratio_remain: 세계잉여금을 제외한 예산집행률
 rate1: 예산대비채무비율
 rate2: 재정자립도
 rate3: 예산대비실제세입
+rate4: 재정자주도
+rate5: 통합재정수지비율
 comp1: 국회여당 정당일치여부
 comp2: 국회다수당 정당일치여부
 var102: 광역지방자치단체장과 정당일치여부
+var103: 지방선거 유무
 dt: 고령 인구비율
